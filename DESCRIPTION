@@ -1,0 +1,11 @@
+Package: dcm2niir
+Type: Package
+Title: Set of imaging tools for conversion of DICOM to NIfTI
+Version: 1.1
+Date: 2015-04-06
+Author: John Muschelli
+Maintainer: John Muschelli <muschellij2@gmail.com>
+Description: Set of Imaging tools for CT data
+Depends:
+    R (>= 3.0.1)
+License: GPL-2
