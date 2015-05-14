@@ -5,8 +5,7 @@
 \title{DICOM 2 NIFTI Converter}
 \usage{
 dcm2nii(basedir, progdir = system.file(package = "dcm2niir"),
-  verbose = TRUE, dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix"),
-  ...)
+  verbose = TRUE, dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix"))
 }
 \arguments{
 \item{basedir}{(character) directory to run \code{dcm2nii}}

@@ -24,8 +24,8 @@
 dcm2nii <- function(basedir, 
                     progdir = system.file(package="dcm2niir"), 
                     verbose=TRUE, 
-                    dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix"), 
-                    ...){  
+                    dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix")
+                    ){  
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname,
                linux = "_linux",
