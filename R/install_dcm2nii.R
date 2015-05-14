@@ -3,7 +3,7 @@
 #' @return NULL
 #' @export
 install_dcm2nii = function(){
-  dcm2nii_files = system.file("dcm2nii", package= "")
+  dcm2nii_files = system.file("dcm2nii", package= "dcm2niir")
   
   if (!file.exists(dcm2nii_files)){
     url = "http://muschellij2.github.io/cttools/dcm2nii_files.zip"
