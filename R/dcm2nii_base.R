@@ -41,6 +41,9 @@ dcm2nii <- function(basedir,
   stopifnot(file.exists(file.path(progdir, dcm2niicmd)))
   basedir = normalizePath(basedir)
   
+  niis_orig = list.files(path = basedir, 
+                         pattern = ".*nii", 
+                         full.names = TRUE)
   intern=TRUE
   if (!grepl("dcm2niix", dcm2niicmd)){
     cmd = sprintf('%s/%s -b "%s"/CT_dcm2nii.ini "%s"', progdir,
@@ -51,7 +54,12 @@ dcm2nii <- function(basedir,
     cmd = paste(cmd1, " -z -f %p_%t_%s ", cmd2)
     if (verbose) print(cmd)
   }
-  res <- system(cmd, intern=intern)      
+  res <- system(cmd, intern=intern)  
+  niis_new = list.files(path = basedir, 
+                         pattern = ".*nii", 
+                         full.names = TRUE)  
+  niis = setdiff(niis_new, niis_orig)
+  
   if (intern) {
     errs <- any(grepl("Error|use MRIcro|Unsupported Transfer Syntax", res))
   } else {
@@ -59,5 +67,5 @@ dcm2nii <- function(basedir,
   }
   stopifnot(length(errs) == 1)
   
-  return(list(result=res, error = errs))
+  return(list(result=res, error = errs, niis = niis))
 } ## end dcm2nii
