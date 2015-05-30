@@ -41,6 +41,9 @@ dcm2nii <- function(basedir,
   stopifnot(file.exists(file.path(progdir, dcm2niicmd)))
   basedir = normalizePath(basedir)
   
+  ####################
+  # Getting the names of the files that were present previously
+  ####################
   niis_orig = list.files(path = basedir, 
                          pattern = ".*nii", 
                          full.names = TRUE)
@@ -55,9 +58,15 @@ dcm2nii <- function(basedir,
     if (verbose) print(cmd)
   }
   res <- system(cmd, intern=intern)  
+  ####################
+  # Getting the names of the files that were present after command is run
+  ####################  
   niis_new = list.files(path = basedir, 
                          pattern = ".*nii", 
-                         full.names = TRUE)  
+                         full.names = TRUE) 
+  ####################
+  # Take setdiff to get the output niis
+  ####################   
   niis = setdiff(niis_new, niis_orig)
   
   if (intern) {
