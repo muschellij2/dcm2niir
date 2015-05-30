@@ -5,7 +5,8 @@
 \title{DICOM 2 NIFTI Converter}
 \usage{
 dcm2nii(basedir, progdir = system.file(package = "dcm2niir"),
-  verbose = TRUE, dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix"))
+  verbose = TRUE, dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix"),
+  retimg = TRUE)
 }
 \arguments{
 \item{basedir}{(character) directory to run \code{dcm2nii}}
@@ -18,6 +19,8 @@ unless necessary}
 \item{dcm2niicmd}{(character) either "dcm2nii" or "dcm2nii_2009", which
 are different versions of dcm2nii.  Can also be "dcm2niix" - experimental
 and only Mac OSX}
+
+\item{retimg}{Return images in the list rather than filenames}
 }
 \value{
 List of result of \code{system} run and indication of an error

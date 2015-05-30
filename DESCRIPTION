@@ -8,4 +8,6 @@ Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Creates simple wrapper for the dcm2nii function from Chris Rorden.
 Depends:
     R (>= 3.0.1)
+Imports:
+    oro.nifti
 License: GPL-3
