@@ -11,3 +11,4 @@ Depends:
 Imports:
     oro.nifti
 License: GPL-3
+RoxygenNote: 5.0.0

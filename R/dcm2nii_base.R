@@ -9,7 +9,6 @@
 #' @param verbose (logical) print diagnostic printouts
 #' @param dcm2niicmd (character) either "dcm2nii" or "dcm2nii_2009", which 
 #' are different versions of dcm2nii.  Can also be "dcm2niix" - experimental
-#' and only Mac OSX
 #' @param retimg Return images in the list rather than filenames
 #' @return List of result of \code{system} run and indication of an error
 #' @export
@@ -26,7 +25,7 @@
 dcm2nii <- function(basedir, 
                     progdir = system.file(package="dcm2niir"), 
                     verbose=TRUE, 
-                    dcm2niicmd = c("dcm2nii_2009", "dcm2nii", "dcm2niix"),
+                    dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
                     retimg = TRUE
                     ){  
   sysname = tolower(Sys.info()["sysname"])
