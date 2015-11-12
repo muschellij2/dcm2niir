@@ -2,6 +2,8 @@
 #' @description Install dcm2nii to dcm2niir for conversion tools 
 #' @return NULL
 #' @export
+#' @examples 
+#' install_dcm2nii()
 install_dcm2nii = function(){
   dcm2nii_files = system.file("dcm2nii", package= "dcm2niir")
   

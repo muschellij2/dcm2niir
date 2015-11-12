@@ -2,4 +2,3 @@
 
 export(dcm2nii)
 export(install_dcm2nii)
-import(oro.nifti)

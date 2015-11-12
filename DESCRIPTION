@@ -1,14 +1,12 @@
 Package: dcm2niir
 Type: Package
-Title: Set of Imaging Tools for Conversion of DICOM to NIfTI
-Version: 0.0
-Date: 2015-05-14
+Title: Conversion of DICOM to NIfTI through R
+Version: 0.1
+Date: 2015-11-10
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Creates simple wrapper for the dcm2nii function from Chris Rorden.
 Depends:
     R (>= 3.0.1)
-Imports:
-    oro.nifti
 License: GPL-3
 RoxygenNote: 5.0.0
