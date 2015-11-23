@@ -35,7 +35,8 @@ dcm2nii <- function(basedir,
     }
     tdir = tempfile()
     dir.create(tdir)
-    l = list.files(path = basedir, recursive = TRUE, all.files = TRUE)
+    l = list.files(path = basedir, recursive = TRUE, all.files = TRUE,
+                   full.names = TRUE)
     file.copy(from = l, to = tdir)
     basedir = tdir
   }
