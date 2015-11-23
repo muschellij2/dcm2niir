@@ -24,7 +24,8 @@ are different versions of dcm2nii.}
 \item{...}{arguments to be passed to \code{\link{system}}}
 }
 \value{
-Result of \code{system} command.
+List of result of \code{system} command, names of files before and after
+conversion
 }
 \description{
 Uses Chris Rorden's dcm2nii from 
