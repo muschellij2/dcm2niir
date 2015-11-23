@@ -4,12 +4,14 @@
 \alias{dcm2nii}
 \title{Simple run of DICOM 2 NIFTI Converter}
 \usage{
-dcm2nii(basedir, progdir = system.file(package = "dcm2niir"),
-  verbose = TRUE, dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
-  ...)
+dcm2nii(basedir, copy_files = TRUE, progdir = system.file(package =
+  "dcm2niir"), verbose = TRUE, dcm2niicmd = c("dcm2niix", "dcm2nii_2009",
+  "dcm2nii"), ...)
 }
 \arguments{
 \item{basedir}{(character) directory to get files}
+
+\item{copy_files}{(logical) Should files be copied to a temporary directory?}
 
 \item{progdir}{(character) directory of bash scripts, no user input needed
 unless necessary}

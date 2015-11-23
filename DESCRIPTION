@@ -1,7 +1,7 @@
 Package: dcm2niir
 Type: Package
 Title: Conversion of DICOM to NIfTI Through R
-Version: 0.1
+Version: 0.1.2
 Date: 2015-11-10
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
