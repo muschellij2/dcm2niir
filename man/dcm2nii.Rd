@@ -6,7 +6,7 @@
 \usage{
 dcm2nii(basedir, copy_files = TRUE, progdir = system.file(package =
   "dcm2niir"), verbose = TRUE, dcm2niicmd = c("dcm2niix", "dcm2nii_2009",
-  "dcm2nii"), ...)
+  "dcm2nii"), opts = "-z y -f \%p_\%t_\%s", ...)
 }
 \arguments{
 \item{basedir}{(character) directory to get files}
@@ -20,6 +20,8 @@ unless necessary}
 
 \item{dcm2niicmd}{(character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
 are different versions of dcm2nii.}
+
+\item{opts}{list of arguments to pass to \code{dcm2nii}.}
 
 \item{...}{arguments to be passed to \code{\link{system}}}
 }

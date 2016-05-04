@@ -9,16 +9,18 @@
 #' @param verbose (logical) print diagnostic printouts
 #' @param dcm2niicmd (character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
 #' are different versions of dcm2nii.  
+#' @param opts list of arguments to pass to \code{dcm2nii}.
 #' @param ... arguments to be passed to \code{\link{system}}
 #' @return List of result of \code{system} command, names of files before and after
 #' conversion
 #' @export
 dcm2nii <- function(basedir, 
                     copy_files = TRUE,
-                        progdir = system.file(package = "dcm2niir"), 
-                        verbose=TRUE, 
-                        dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
-                        ...){  
+                    progdir = system.file(package = "dcm2niir"), 
+                    verbose=TRUE, 
+                    dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
+                    opts = "-z y -f %p_%t_%s",
+                    ...){  
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname,
                linux = "_linux",
@@ -44,20 +46,27 @@ dcm2nii <- function(basedir,
   l_before = list.files(pattern = "[.]nii", path = basedir, 
                         recursive = TRUE, all.files = TRUE,
                         full.names = TRUE)
-  if (verbose) cat("Converting to nii \n")
-  cmd1 = sprintf('%s/%s', shQuote(progdir), dcm2niicmd)
+  if (verbose) {
+    message("# Converting to nii \n")
+  }
+  dcm2niicmd = match.arg(dcm2niicmd)
+  cmd = file.path(progdir, dcm2niicmd)
+  cmd1 = sprintf("%s", shQuote(cmd))
   cmd2 = sprintf("%s", shQuote(basedir))
-  cmd = paste(cmd1, " -z -f %p_%t_%s ", cmd2)
-  if (verbose) print(cmd)
+  cmd = paste(cmd1, " ", opts, " ", cmd2)
+  if (verbose) {
+    message(cmd)
+  }
   res <- system(cmd, ...)
-  l_after = list.files(pattern = "[.]nii", path = basedir, 
-                        recursive = TRUE, all.files = TRUE,
-                        full.names = TRUE)
-
+  l_after = list.files(pattern = "[.]nii", 
+                       path = basedir, 
+                       recursive = TRUE, all.files = TRUE,
+                       full.names = TRUE)
+  
   return(list(result = res, 
               nii_before = l_before,
               nii_after = l_after,
               cmd = cmd
-              )
+  )
   )
 } ## end dcm2nii
