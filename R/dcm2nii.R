@@ -49,7 +49,6 @@ dcm2nii <- function(basedir,
   if (verbose) {
     message("# Converting to nii \n")
   }
-  dcm2niicmd = match.arg(dcm2niicmd)
   cmd = file.path(progdir, dcm2niicmd)
   cmd1 = sprintf("%s", shQuote(cmd))
   cmd2 = sprintf("%s", shQuote(basedir))
