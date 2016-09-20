@@ -1,8 +1,8 @@
 Package: dcm2niir
 Type: Package
 Title: Conversion of DICOM to NIfTI Through R
-Version: 0.1.5
-Date: 2016-05-04
+Version: 0.1.2
+Date: 2016-09-20
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Creates simple wrapper for the dcm2nii function from Chris Rorden.
@@ -11,4 +11,4 @@ Depends:
 Imports:
     dplyr
 License: GPL-3
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000

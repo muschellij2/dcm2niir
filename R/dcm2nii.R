@@ -52,7 +52,7 @@ dcm2nii <- function(basedir,
   cmd = file.path(progdir, dcm2niicmd)
   cmd1 = sprintf("%s", shQuote(cmd))
   cmd2 = sprintf("%s", shQuote(basedir))
-  cmd = paste(cmd1, " ", opts, " ", cmd2)
+  cmd = paste0(cmd1, " ", opts, " ", cmd2)
   if (verbose) {
     message(cmd)
   }
