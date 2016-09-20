@@ -6,6 +6,7 @@
 #' Passed to \code{\link{system.file}}  
 #' @examples 
 #' install_dcm2nii()
+#' @importFrom utils download.file unzip
 install_dcm2nii = function(lib.loc = NULL){
   dcm2nii_files = system.file("dcm2nii", package = "dcm2niir",
                               lib.loc = lib.loc)

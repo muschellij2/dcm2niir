@@ -6,11 +6,14 @@
 #' \code{nii_after} element
 #'
 #' @return Character vector of unique nifti filenames
-#' @importFrom dplyr arrange group_by
+#' @importFrom dplyr arrange group_by desc
 #' @export
+#' @importFrom utils head
 check_dcm2nii = function(dcm2nii_output){
 #   print(path)
 #   niis = dcm2nii(path)
+  stub = NULL
+  rm(list = "stub");
   niis = dcm2nii_output$nii_after
   if (length(niis) > 1) {
     bn = basename(niis)
