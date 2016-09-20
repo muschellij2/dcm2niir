@@ -13,7 +13,9 @@ dcm2nii_version = function(
 ) {
   cmd = dcm2nii_bin(...)
   cmd = paste0(cmd, " -h")
-  res = system(cmd, intern = TRUE)
+  suppressWarnings({
+    res = system(cmd, intern = TRUE)
+  })
   res = trimws(res)
   res = grep("^Chris", res, value = TRUE)
   return(res)
