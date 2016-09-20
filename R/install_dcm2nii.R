@@ -24,6 +24,7 @@ install_dcm2nii = function(lib.loc = NULL){
                     lib.loc = lib.loc))
     for (ifile in files) system(sprintf("chmod +x %s", ifile))
     x = file.remove(urlfile)
+    rm(x)
   }
   dcm2nii_files = system.file("dcm2nii", 
                               package = "dcm2niir",

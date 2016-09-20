@@ -13,13 +13,13 @@ dcm2nii(basedir, copy_files = TRUE, progdir = system.file(package =
 
 \item{copy_files}{(logical) Should files be copied to a temporary directory?}
 
-\item{progdir}{(character) directory of bash scripts, no user input needed
-unless necessary}
+\item{progdir}{(character) directory of bash scripts, no user input needed unless
+binaries were installed elsewhere. Passed to \code{\link{dcm2nii_bin}}.}
 
 \item{verbose}{(logical) print diagnostic printouts}
 
 \item{dcm2niicmd}{(character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
-are different versions of dcm2nii.}
+are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.}
 
 \item{opts}{list of arguments to pass to \code{dcm2nii}.}
 

@@ -2,6 +2,8 @@
 
 export(check_dcm2nii)
 export(dcm2nii)
+export(dcm2nii_bin)
+export(dcm2nii_version)
 export(install_dcm2nii)
 importFrom(dplyr,arrange)
 importFrom(dplyr,desc)
