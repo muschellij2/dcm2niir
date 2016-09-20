@@ -13,8 +13,6 @@ binaries were installed elsewhere}
 
 \item{dcm2niicmd}{(character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
 are different versions of dcm2nii.}
-
-\item{verbose}{(logical) print diagnostic printouts}
 }
 \value{
 Character vector

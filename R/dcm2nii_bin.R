@@ -4,7 +4,6 @@
 #'
 #' @param progdir (character) directory of bash scripts, no user input needed unless
 #' binaries were installed elsewhere
-#' @param verbose (logical) print diagnostic printouts
 #' @param dcm2niicmd (character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
 #' are different versions of dcm2nii. 
 #' @return Character vector 
