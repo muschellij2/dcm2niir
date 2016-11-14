@@ -54,7 +54,9 @@ dcm2nii <- function(basedir,
                        path = basedir, 
                        recursive = TRUE, all.files = TRUE,
                        full.names = TRUE)
-  
+  if (res != 0) {
+    warning("Result indicated an error!  Please check resutls.")
+  }
   return(list(result = res, 
               nii_before = l_before,
               nii_after = l_after,
