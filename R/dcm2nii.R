@@ -14,7 +14,7 @@
 #' @return List of result of \code{system} command, names of files before and after
 #' conversion
 #' @export
-dcm2nii <- function(basedir, 
+dcm2nii <- function(basedir = ".", 
                     copy_files = TRUE,
                     progdir = system.file(package = "dcm2niir"), 
                     verbose = TRUE, 
