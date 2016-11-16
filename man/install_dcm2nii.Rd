@@ -7,7 +7,7 @@
 install_dcm2nii(lib.loc = NULL)
 }
 \arguments{
-\item{lib.loc}{a character vector with path names of R libraries. 
+\item{lib.loc}{a character vector with path names of R libraries.
 Passed to \code{\link{system.file}}}
 }
 \description{
