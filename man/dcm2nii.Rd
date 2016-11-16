@@ -2,7 +2,7 @@
 % Please edit documentation in R/dcm2nii.R
 \name{dcm2nii}
 \alias{dcm2nii}
-\title{Simple run of DICOM 2 NIFTI Converter}
+\title{Simple run of DICOM 2 NIfTI Converter}
 \usage{
 dcm2nii(basedir = ".", copy_files = TRUE, progdir = system.file(package =
   "dcm2niir"), verbose = TRUE, dcm2niicmd = c("dcm2niix", "dcm2nii_2009",
