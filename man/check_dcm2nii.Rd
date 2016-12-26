@@ -17,4 +17,3 @@ Character vector of unique nifti filenames
 This function checks whether the output from \code{\link{dcm2nii}}
 runs correctly in that only one \code{nifti} file is returned if only one exists
 }
-

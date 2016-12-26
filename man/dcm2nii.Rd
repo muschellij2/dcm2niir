@@ -34,4 +34,3 @@ Uses Chris Rorden's dcm2nii from
 http://www.mccauslandcenter.sc.edu/mricro/mricron/dcm2nii.html to convert
 DICOM files to NIfTI format.  Should Need run \code{\link{install_dcm2nii}} before running.
 }
-

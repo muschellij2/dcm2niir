@@ -6,7 +6,7 @@
 #' \code{nii_after} element
 #'
 #' @return Character vector of unique nifti filenames
-#' @importFrom dplyr arrange group_by desc
+#' @importFrom dplyr arrange group_by desc slice
 #' @export
 #' @importFrom utils head
 check_dcm2nii = function(dcm2nii_output){
@@ -31,7 +31,8 @@ check_dcm2nii = function(dcm2nii_output){
       nc = nc,
       stringsAsFactors = FALSE)
     df = dplyr::arrange(df, stub, desc(nc))
-    df = head(dplyr::group_by(df, stub), 1)
+    df = dplyr::group_by(df, stub)
+    df = dplyr::slice(df, 1)
     niis = df$name
   }
   niis

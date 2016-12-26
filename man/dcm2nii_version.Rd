@@ -20,4 +20,3 @@ Finds the version of the dcm2nii function called
 dcm2nii_version()
 }
 }
-

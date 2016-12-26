@@ -26,4 +26,3 @@ creating a file path to the binary requested.
 dcm2nii_bin()
 }
 }
-

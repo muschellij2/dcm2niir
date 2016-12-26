@@ -16,4 +16,3 @@ Install dcm2nii to dcm2niir for conversion tools
 \examples{
 install_dcm2nii()
 }
-

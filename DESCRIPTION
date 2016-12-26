@@ -1,8 +1,8 @@
 Package: dcm2niir
 Type: Package
 Title: Conversion of 'DICOM' to 'NIfTI' Imaging Files Through R
-Version: 0.3.3
-Date: 2016-11-16
+Version: 0.4
+Date: 2016-12-26
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Creates simple wrapper for the 'dcm2nii' and 'dcm2niix' functions 
@@ -15,6 +15,8 @@ Imports:
     dplyr,
     utils
 License: GPL-3
-BugReports: https://github.com/muschellij2/dcm2niir/issues,https://github.com/neurolabusc/dcm2niix
+SystemRequirements: dcm2niix (https://github.com/rordenlab/dcm2niix)
+BugReports: https://github.com/muschellij2/dcm2niir/issues,
+  https://github.com/neurolabusc/dcm2niix
 URL: https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage
 RoxygenNote: 5.0.1.9000
