@@ -7,6 +7,7 @@
 #' @examples
 #' install_dcm2nii()
 #' @importFrom utils download.file unzip
+#' @importFrom httr stop_for_status GET write_disk progress
 install_dcm2nii = function(lib.loc = NULL){
   dcm2nii_files = system.file("dcm2nii", package = "dcm2niir",
                               lib.loc = lib.loc)
@@ -20,8 +21,12 @@ install_dcm2nii = function(lib.loc = NULL){
     urlfile <- file.path(
       system.file(package = "dcm2niir",
                   lib.loc = lib.loc),
-      "dcm2nii_files.zip")
-    download.file(url, urlfile)
+      "dcm2nii_files.zip")    
+    # download.file(url, urlfile)
+    req = httr::GET(url, 
+                     httr::write_disk(path = urlfile),
+                     httr::progress())  
+    httr::stop_for_status(req)
     files = unzip(urlfile,
                   exdir = system.file(
                     package = "dcm2niir",
