@@ -1,0 +1,65 @@
+---
+title: "Converting DICOMs to NIfTI Images"
+author: "John Muschelli"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Converting DICOMs to NIfTI Images}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `dcm2niir` package creates simple wrapper for the 'dcm2nii' and 'dcm2niix' functions from Chris Rorden (https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage)
+for converting Digital Imaging and Communications in Medicine (DICOM) data to Neuroimaging Informatics Technology Initiative (NIfTI) formats.  
+
+
+# Download the data
+
+For use in this vignette, we will download some mouse enhanced magnetic resonance image (MRI).  In the case below, we are downloading a T1-weighted pre-contrast image.  The `dcm2niix` software can handle individual DICOM images (1 `dcm` file per slice) or combined/3D DICOM images (1 `dcm` per volume).  Below, the example `dcm` is an entire series/volume.
+
+We will create a temporary directory and download the `dcm` file to that directory.  We do this because `dcm2niir::dcm2nii` takes in a folder/directory as the main argument `basedir`.  
+
+```{r data_dl}
+library(utils)
+dcm_file = "ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm"
+tdir = tempfile()
+dir.create(tdir)
+destfile = tempfile(fileext = ".dcm", tmpdir = tdir)
+dl = download.file(url = dcm_file, destfile = destfile)
+dl == 0
+file.exists(destfile)
+```
+
+We see a zero exit status and that the data exists.  If this fails, you may not have `ftp` capabilities with R or your internet connection.  Otherwise, this data may have moved, and please email the maintainer or submit an issue/bug report.
+
+# Loading the package
+
+We load the library here and run the `install_dcm2nii` function.  This downloads the binaries of the `dcm2nii` and `dcm2niix` software to use at the command line.  This only needs to be run once after the installation of `dcm2niir`.  Most functions should check this before running, so this step is not completely necessary, but allows you to check if `dcm2niix` is installed, and if not, it will install the binary.
+
+```{r installer}
+library(dcm2niir)
+install_dcm2nii()
+```
+
+# Convert the data
+
+The main function is `dcm2nii`, and again the main argument is `basedir`.  The argument `copy_files` indicates if the data from `basedir` should be copied to a temporary directory and `dcm2nii` will be run on that.  This ensures nothing is done to the original data in case of a failure.
+
+```{r data_convert}
+res = dcm2niir::dcm2nii(basedir = tdir)
+res
+```
+The command line results from `dcm2niix` should be printed out along with the command.
+
+We see the resulting list consisting of the `result` (exit status of `dcm2niix` - 0 means success), `nii_before` (filenames of NIfTI files in the directory before running), `nii_after` (filenames of NIfTI files in the directory before running, these are the converted ones), and the `command` passed to `system` (in the `cmd` slot). 
+
+## Manipulating the output
+
+There is a quick wrapper function called `check_dcm2nii` that takes this output.  If there are multiple outputs for the same sequence, which may happen with variable slice thicknesses in the sequence (CT or MRI), which is interpolated, or gantry tilt (CT), then `check_dcm2nii` will try to choose the correct one.  Otherwise, it returns the `nii_after` element.  Either way, it returns a character vector:
+
+```{r data_check}
+checked = check_dcm2nii(res)
+checked
+file.exists(checked)
+```
+Now this file can be read in using `neurobase::readnii`, `ortho2::readNIfTI`, `RNifti::readNifti`, or `ANTsR::antsImageRead` and be used as a 3D image.

@@ -1,0 +1,104 @@
+2009/04/07 DAC.
+
+Pixel Spacing Test Images.
+
+Purpose.
+
+The purpose of these test images to is to evaluate how display software performs
+when confronted by different pixel spacing related attributes in DICOM projection
+radiography images, and how these affect distance and size measurements made
+by the user.
+
+Background.
+
+Unlike cross-sectional modalities like CT and MR, in which the physical spacing
+is known, regardless of where in the body the measurement is being made, there
+is a geometric magnification effect caused by the diverging x-ray beam, which
+is generated at a point source and diverges as it passes through the subject
+and impinges on the detector. Thus the distance between the source and the
+detector and the distance between the object within the subject being measured
+and the detector varies, depending on the acquisition geometry and where within
+the subject the object being measured is located.
+
+Within film-screen projection radiography, measurements are traditionally made
+on the film itself, hence any object close to the film will be measured with
+the correct size, and any object significantly closer to the source than the
+film will be magnified, and measured with a size larger than actual size.
+
+An acquisition modality or its user may provide some mechanism for compensating
+for this effect, and provide additional "calibration" information in order
+to improve the accuracy of a measurement in a particular location or plane;
+any such "calibration" is of course only applicable to measurements made
+at the specified location or plane, and measurements of anything else will
+be inaccurate.
+
+In the DICOM attributes, for cross-sectional modalities, the physical spacing
+between pixels is encoded in Pixel Spacing (0028,0030).
+
+For projection radiography, the pixel spacing at the plane of the detector is
+specified in Imager Pixel Spacing (0018,1164).
+
+Since CP 586, if both Pixel Spacing (0028,0030) and Imager Pixel Spacing (0018,1164)
+are present in a projection radiography image, and they have different values,
+then the image is deemed to have been "calibrated", and addtitional attributes
+are provided to describe whether this calibration was performed with respect
+to some object of known size visible in the image ("fiducial") or some known
+characteristic of the acquisition system ("geometry").
+
+Test Images.
+
+A set of 8 test images are provided, 2 each for 4 modalities (CR, DX, MG, XA).
+
+One of each pair contains both Pixel Spacing and Imager Pixel Spacing, as well
+as the CP 586 calibration-related descriptive attributes.
+
+The other contains only Imager Pixel Spacing, and not Pixel Spacing; it also
+includes the Estimated Radiographic Magnification factor.
+
+Within the pixel data of each image is a description of the expected result
+and a burned in ruler of fixed length.
+
+Test Procedure.
+
+For each image in the test set:
+
+- Display the image
+
+- Make a linear distance (ruler) measurement of the burned in ruler.
+
+- Compare the distance, units and type of measurement reported by the display
+software with the expected results described in the text in the image.
+
+Expected Results.
+
+Under no circumstances should the result be reported in pixels rather than mm;
+this implies that the display software does not recognize the spacing attributes
+at all.
+
+For the set of images that contain Imager Pixel Spacing and not Pixel Spacing,
+the display software may report either a measurement that is valid at the detector
+plane, or which is corrected for geometric magnification using the magnification
+factor explicitly encoded in the object; the latter behavior is required by the
+IHE Mammography profile. A SYSTEM THAT REPORTS THESE IN PIXELS IS VERY LIKELY
+DESIGNED ONLY FOR DISPLAY OF CROSS-SECTIONAL, AND NOT PROJECTION IMAGES.
+
+For the set of images that also contain Pixel Spacing, the display software may
+either report the calibrated value, the detector plane value, or a value
+corrected for geometric magnification.
+
+In any case, the display software should report to the user what type of measurement
+is being displayed, since it is potentially unsafe if the user is not made aware
+of what plane their measurements may be accurate for, and conversely, for which
+other planes their measurements will be inaccurate. A SYSTEM THAT REPORTS THE
+CALIBRATED VALUE WITHOUT WARNING THE USER MAY VIOLATE THE USER'S ASSUMPTION THAT
+THE BEHAVIOR IS "FILM-LIKE", I.E., THAT THE MEASUREMENT IS VALID AT THE DETECTOR
+PLANE.
+
+One suggestion to implementors is to append a suffix to the units of the measurement
+to indicate the type of measurement (e.g., "detector", "calibrated", "fiducial", etc.,
+versus "3D" for a cross-sectional or tomographic measurement). For maximum flexibility,
+and to promote awareness of the issue of projection radiography measurement accuracy,
+the system could provide the user with a choice when multiplt different "types"
+of spacing information is available.
+
+End.

@@ -1,14 +1,14 @@
 Package: dcm2niir
 Type: Package
 Title: Conversion of 'DICOM' to 'NIfTI' Imaging Files Through R
-Version: 0.4.1
-Date: 2016-12-26
+Version: 0.5
+Date: 2017-02-24
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Creates simple wrapper for the 'dcm2nii' and 'dcm2niix' functions 
     from Chris Rorden (https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage)
     at 'USC', which converts Digital Imaging and Communications in Medicine ('DICOM')
-    data to Neuroimaging Informatics Technology Initiative (NIfTI) formats.
+    data to Neuroimaging Informatics Technology Initiative ('NIfTI') formats.
 Depends:
     R (>= 3.0.1)
 Imports:
@@ -20,4 +20,7 @@ SystemRequirements: dcm2niix (https://github.com/rordenlab/dcm2niix)
 BugReports: https://github.com/muschellij2/dcm2niir/issues,
   https://github.com/neurolabusc/dcm2niix
 URL: https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
