@@ -1,14 +1,28 @@
-# Sample .travis.yml for R projects.
-
 language: r
 warnings_are_errors: true
-sudo: required
+sudo: false
+cache: packages
+os:
+  - linux
+  - osx
+
 before_install:
-    - echo "TRAVIS BUILD ID"
-    - echo ${TRAVIS_BUILD_ID}
-    - echo "TRAVIS JOB ID"
-    - echo ${TRAVIS_JOB_ID}
+- echo "TRAVIS BUILD ID"
+- echo ${TRAVIS_BUILD_ID}
+- echo "TRAVIS JOB ID"
+- echo ${TRAVIS_JOB_ID}
 notifications:
   email:
     on_success: change
     on_failure: change
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: g5XJ2yV0yn7inVP9HHRcRqze2OWQoOa+Iiy1/EMCLi1TO1+N3ZEs4QM7+T8h1i/VRI0tIwQsekCb/kxVSX82LbrHg7rF4GFiO2DEhFh/3bwMljd8jvgaYrU52jIZINGFjC+puXnya3/nciftICvPQvbOgZXwhj8/3KCtqMyAPgVbBFxGvusLcopujDCYSROV8Mvik6zU8fB++hSsrehzaBz+UoIlBlFuvQH+OQ+EPbD466zTSBnRt0KixZ/bDnf7U/fgNI81ArFgQHBR9hDem8DVZ+JbA9D64NsDOFFLHvNq2otmqeRtDQGhh0cQmWMjub6IbkfdDDocXTAaKvoTcc0k0UbAFlq+0XlwDEuln3xBrA/QZAdaJx/n1MimMLFOHMlHGg/W3z4A3DDgIL2NUn7ItWgUSSr+mTBd5vUjfDkSIaHX0QLCpxi/7rXm/hiOug95H7c3rX8YW4Z6pkYTXmVGFzno5woNB8oemzQD+cKjJQv7dbHLjb7JzW32M8NLL/F1/P72iE3OGmHwMBLv4a4g21km4wHcQ1VAnX/WNxYPl5sq26w/zQhw9PLTIQherYzZyeHiSaQutIrZzD8fH7zvzklFCG6XE9cFnYBLtDNVrBPGJ39yFV6gT9z+BQfFXyZrLs8X18g+yQBC8K0EtCsDyxurqBmOqq8cwh4LBjs=
+  file_glob: true
+  file: dcm2niir*.t*gz
+  on:
+    tags: true    
+    repo: muschellij2/dcm2niir

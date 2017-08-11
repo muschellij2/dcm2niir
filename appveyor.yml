@@ -42,8 +42,17 @@ artifacts:
   - path: '*.Rcheck\**\*.Rout'
     name: Logs
 
-  - path: '\*_*.tar.gz'
-    name: Bits
-
   - path: '\*_*.zip'
     name: Bits
+
+
+deploy:
+  provider: GitHub
+  description: 'Windows Binary'
+  auth_token:
+    secure: tc2Va9OWLH9H/uKPUKCUmv+q+wQpzRVJd6t8ckXjqzGnOo9eWyiQCmuuUjcuM3b8
+  draft: false
+  prerelease: false
+  on:
+    appveyor_repo_tag: true
+
