@@ -6,6 +6,7 @@ os:
   - linux
   - osx
 
+r_check_args: "--as-cran --install-args=--build"
 before_install:
 - echo "TRAVIS BUILD ID"
 - echo ${TRAVIS_BUILD_ID}
