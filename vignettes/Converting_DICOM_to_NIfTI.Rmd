@@ -25,7 +25,9 @@ dcm_file = "ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrain
 tdir = tempfile()
 dir.create(tdir)
 destfile = tempfile(fileext = ".dcm", tmpdir = tdir)
-dl = download.file(url = dcm_file, destfile = destfile)
+ci = Sys.getenv("CI")
+method = ifelse(ci == "", "auto", "curl")
+dl = download.file(url = dcm_file, method = method, destfile = destfile)
 dl == 0
 file.exists(destfile)
 ```
