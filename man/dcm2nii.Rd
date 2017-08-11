@@ -36,7 +36,9 @@ DICOM files to NIfTI format.  Should Need run \code{\link{install_dcm2nii}} befo
 }
 \examples{
 library(utils)
-dcm_file = "ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm"
+dcm_file = paste0("ftp://medical.nema.org/medical/Dicom/", 
+"DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/", 
+"Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm")
 tdir = tempfile()
 dir.create(tdir)
 destfile = tempfile(fileext = ".dcm", tmpdir = tdir)
@@ -44,7 +46,8 @@ ci = Sys.getenv("CI")
 method = ifelse(ci == "", "auto", "curl")
 dl = download.file(url = dcm_file, method = method, destfile = destfile)
 dl == 0
-file.exists(destfile)
+stopifnot(file.exists(destfile))
 dcm2niir::install_dcm2nii()
 res = dcm2niir::dcm2nii(basedir = tdir)
+stopifnot(res$result == 0)
 }
