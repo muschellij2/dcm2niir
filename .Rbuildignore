@@ -7,5 +7,5 @@ dcm2nii_files.zip
 ^appveyor\.yml$
 inst/dcm2nii*
 inst/dcmdump
-inst/scct*
+inst/scct*.nii.gz
 inst/__MACOSX
