@@ -4,3 +4,4 @@
 
 R/Obsolete/*
 dcm2nii_files.zip
+^appveyor\.yml$
