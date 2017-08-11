@@ -12,3 +12,6 @@
 # RStudio files
 .Rproj.user/
 inst/doc
+inst/dcm2nii*
+inst/dcmdump
+inst/__MACOSX
