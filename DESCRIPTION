@@ -1,8 +1,8 @@
 Package: dcm2niir
 Type: Package
 Title: Conversion of 'DICOM' to 'NIfTI' Imaging Files Through R
-Version: 0.5.1
-Date: 2017-02-24
+Version: 0.5.1.1
+Date: 2017-08-21
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Creates simple wrapper for the 'dcm2nii' and 'dcm2niix' functions 

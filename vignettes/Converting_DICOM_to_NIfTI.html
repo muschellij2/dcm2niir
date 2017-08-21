@@ -12,7 +12,7 @@
 
 <meta name="author" content="John Muschelli" />
 
-<meta name="date" content="2017-08-10" />
+<meta name="date" content="2017-08-21" />
 
 <title>Converting DICOMs to NIfTI Images</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Converting DICOMs to NIfTI Images</h1>
 <h4 class="author"><em>John Muschelli</em></h4>
-<h4 class="date"><em>2017-08-10</em></h4>
+<h4 class="date"><em>2017-08-21</em></h4>
 
 
 
@@ -80,7 +80,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>For use in this vignette, we will download some mouse enhanced magnetic resonance image (MRI). In the case below, we are downloading a T1-weighted pre-contrast image. The <code>dcm2niix</code> software can handle individual DICOM images (1 <code>dcm</code> file per slice) or combined/3D DICOM images (1 <code>dcm</code> per volume). Below, the example <code>dcm</code> is an entire series/volume.</p>
 <p>We will create a temporary directory and download the <code>dcm</code> file to that directory. We do this because <code>dcm2niir::dcm2nii</code> takes in a folder/directory as the main argument <code>basedir</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(utils)
-dcm_file =<span class="st"> &quot;ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm&quot;</span>
+<span class="co"># dcm_file = &quot;ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm&quot;</span>
+dcm_file =<span class="st"> &quot;http://johnmuschelli.com/dcm2niir/mghmousetoenhancedmr_T1w_pre.dcm&quot;</span>
 tdir =<span class="st"> </span><span class="kw">tempfile</span>()
 <span class="kw">dir.create</span>(tdir)
 destfile =<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.dcm&quot;</span>, <span class="dt">tmpdir =</span> tdir)
@@ -274,6 +275,8 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
   |                                                                       
   |===================================                              |  54%
   |                                                                       
+  |===================================                              |  55%
+  |                                                                       
   |====================================                             |  55%
   |                                                                       
   |====================================                             |  56%
@@ -308,8 +311,6 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
   |                                                                       
   |==========================================                       |  65%
   |                                                                       
-  |===========================================                      |  65%
-  |                                                                       
   |===========================================                      |  66%
   |                                                                       
   |===========================================                      |  67%
@@ -333,8 +334,6 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
   |================================================                 |  73%
   |                                                                       
   |================================================                 |  74%
-  |                                                                       
-  |================================================                 |  75%
   |                                                                       
   |=================================================                |  75%
   |                                                                       
@@ -380,8 +379,6 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
   |                                                                       
   |=========================================================        |  88%
   |                                                                       
-  |==========================================================       |  88%
-  |                                                                       
   |==========================================================       |  89%
   |                                                                       
   |==========================================================       |  90%
@@ -389,8 +386,6 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
   |===========================================================      |  90%
   |                                                                       
   |===========================================================      |  91%
-  |                                                                       
-  |===========================================================      |  92%
   |                                                                       
   |============================================================     |  92%
   |                                                                       
@@ -427,7 +422,7 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res =<span class="st"> </span>dcm2niir<span class="op">::</span><span class="kw">dcm2nii</span>(<span class="dt">basedir =</span> tdir)</code></pre></div>
 <pre><code>## #Copying Files</code></pre>
 <pre><code>## # Converting to nii</code></pre>
-<pre><code>## '/Users/johnmuschelli/Dropbox/Packages/dcm2niir/inst/dcm2niix' -z y -f %p_%t_%s '/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//RtmpMZcOsu/file2dd260e09547'</code></pre>
+<pre><code>## '/Users/johnmuschelli/Dropbox/Packages/dcm2niir/inst/dcm2niix' -z y -f %p_%t_%s '/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//Rtmp0fXMRr/filed0d4555e7a68'</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res</code></pre></div>
 <pre><code>## $result
 ## [1] 0
@@ -436,10 +431,10 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
 ## character(0)
 ## 
 ## $nii_after
-## [1] &quot;/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//RtmpMZcOsu/file2dd260e09547/T1w_TSE_pre_20150410095937_12.nii.gz&quot;
+## [1] &quot;/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//Rtmp0fXMRr/filed0d4555e7a68/T1w_TSE_pre_20150410095937_12.nii.gz&quot;
 ## 
 ## $cmd
-## [1] &quot;'/Users/johnmuschelli/Dropbox/Packages/dcm2niir/inst/dcm2niix' -z y -f %p_%t_%s '/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//RtmpMZcOsu/file2dd260e09547'&quot;</code></pre>
+## [1] &quot;'/Users/johnmuschelli/Dropbox/Packages/dcm2niir/inst/dcm2niix' -z y -f %p_%t_%s '/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//Rtmp0fXMRr/filed0d4555e7a68'&quot;</code></pre>
 <p>The command line results from <code>dcm2niix</code> should be printed out along with the command.</p>
 <p>We see the resulting list consisting of the <code>result</code> (exit status of <code>dcm2niix</code> - 0 means success), <code>nii_before</code> (filenames of NIfTI files in the directory before running), <code>nii_after</code> (filenames of NIfTI files in the directory before running, these are the converted ones), and the <code>command</code> passed to <code>system</code> (in the <code>cmd</code> slot).</p>
 <div id="manipulating-the-output" class="section level2">
@@ -447,7 +442,7 @@ dl <span class="op">==</span><span class="st"> </span><span class="dv">0</span><
 <p>There is a quick wrapper function called <code>check_dcm2nii</code> that takes this output. If there are multiple outputs for the same sequence, which may happen with variable slice thicknesses in the sequence (CT or MRI), which is interpolated, or gantry tilt (CT), then <code>check_dcm2nii</code> will try to choose the correct one. Otherwise, it returns the <code>nii_after</code> element. Either way, it returns a character vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">checked =<span class="st"> </span><span class="kw">check_dcm2nii</span>(res)
 checked</code></pre></div>
-<pre><code>## [1] &quot;/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//RtmpMZcOsu/file2dd260e09547/T1w_TSE_pre_20150410095937_12.nii.gz&quot;</code></pre>
+<pre><code>## [1] &quot;/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T//Rtmp0fXMRr/filed0d4555e7a68/T1w_TSE_pre_20150410095937_12.nii.gz&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.exists</span>(checked)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Now this file can be read in using <code>neurobase::readnii</code>, <code>ortho2::readNIfTI</code>, <code>RNifti::readNifti</code>, or <code>ANTsR::antsImageRead</code> and be used as a 3D image.</p>

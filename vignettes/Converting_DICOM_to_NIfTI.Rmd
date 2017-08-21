@@ -21,7 +21,8 @@ We will create a temporary directory and download the `dcm` file to that directo
 
 ```{r data_dl}
 library(utils)
-dcm_file = "ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm"
+# dcm_file = "ftp://medical.nema.org/medical/Dicom/DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm"
+dcm_file = "http://johnmuschelli.com/dcm2niir/mghmousetoenhancedmr_T1w_pre.dcm"
 tdir = tempfile()
 dir.create(tdir)
 destfile = tempfile(fileext = ".dcm", tmpdir = tdir)
