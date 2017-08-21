@@ -9,6 +9,7 @@
 *-Ex.R
 # R data files from past sessions
 .Rdata
+.Rhistory
 # RStudio files
 .Rproj.user/
 inst/doc
@@ -16,3 +17,5 @@ inst/dcm2nii*
 inst/dcmdump
 inst/scct*.nii.gz
 inst/__MACOSX
+README$
+

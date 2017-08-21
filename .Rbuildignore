@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 \.travis\.yml
+^.Rhistory
 
 R/Obsolete/*
 dcm2nii_files.zip
@@ -9,3 +10,6 @@ inst/dcm2nii*
 inst/dcmdump
 inst/scct*.nii.gz
 inst/__MACOSX
+README$
+makefile$
+
