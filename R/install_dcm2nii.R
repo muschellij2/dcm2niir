@@ -15,7 +15,11 @@
 install_dcm2nii = function(lib.loc = NULL,
                            overwrite = FALSE,
                            from_source = FALSE){
-  dcm2nii_files = system.file("dcm2niix", package = "dcm2niir",
+  
+  sysname = tolower(Sys.info()["sysname"])
+  app = switch(sysname, linux = "_linux", darwin = "")
+  fname = paste0("dcm2niix", app)
+  dcm2nii_files = system.file(fname,  package = "dcm2niir",
                               lib.loc = lib.loc)
   
   if (!file.exists(dcm2nii_files) || overwrite) {
@@ -50,6 +54,7 @@ install_dcm2nii = function(lib.loc = NULL,
         system.file(package = "dcm2niir",
                     lib.loc = lib.loc),
         "dcm2niix")
+      out_binary = paste0(out_binary, app)
       file.copy(binary, to = out_binary, overwrite = overwrite)
     } else {
       # url = "http://muschellij2.github.io/cttools/dcm2nii_files.zip"
@@ -77,7 +82,7 @@ install_dcm2nii = function(lib.loc = NULL,
     }
   }
   dcm2nii_files = system.file(
-    "dcm2niix",
+    fname,
     package = "dcm2niir",
     lib.loc = lib.loc)
   return(file.exists(dcm2nii_files))
