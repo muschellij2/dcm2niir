@@ -4,11 +4,13 @@
 \alias{install_dcm2nii}
 \title{Install dcm2nii tools}
 \usage{
-install_dcm2nii(lib.loc = NULL)
+install_dcm2nii(lib.loc = NULL, overwrite = FALSE)
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.
 Passed to \code{\link{system.file}}}
+
+\item{overwrite}{Force reinstallation if one already present}
 }
 \description{
 Install dcm2nii to dcm2niir for conversion tools
