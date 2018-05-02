@@ -91,10 +91,11 @@ dcm2nii_par_rec <- function(
   copy_files = TRUE,
   verbose = TRUE,
   ...){  
-  file = c(file, sub("[.](par|PAR)$", ".rec$", file),
-           sub("[.](par|PAR)$", ".REC$", file),
-           sub("[.](rec|REC)$", ".par$", file),
-           sub("[.](rec|REC)$", ".PAR$", file))
+  file = c(file, 
+           sub("[.](par|PAR)$", ".rec", file),
+           sub("[.](par|PAR)$", ".REC", file),
+           sub("[.](rec|REC)$", ".par", file),
+           sub("[.](rec|REC)$", ".PAR", file))
   file = unique(file)
   file = file[ file.exists(file)]
   file = normalizePath(file, mustWork = TRUE)
