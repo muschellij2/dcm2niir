@@ -85,6 +85,7 @@ dcm2nii <- function(basedir = ".",
 
 #' @param file A Par/REC file
 #' @rdname dcm2nii
+#' @export
 dcm2nii_par_rec <- function(
   file = list.files(pattern = "[.](par|PAR)"), 
   copy_files = TRUE,
