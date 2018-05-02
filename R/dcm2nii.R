@@ -82,3 +82,32 @@ dcm2nii <- function(basedir = ".",
   )
   )
 } ## end dcm2nii
+
+#' @param file A Par/REC file
+#' @rdname dcm2nii
+dcm2nii_par_rec <- function(
+  file = list.files(pattern = "[.](par|PAR)"), 
+  copy_files = TRUE,
+  verbose = TRUE,
+  ...){  
+  file = c(file, sub("[.](par|PAR)$", ".rec$", file),
+           sub("[.](par|PAR)$", ".REC$", file))
+  file = file[ file.exists(file)]
+  file = normalizePath(file, mustWork = TRUE)
+  if (copy_files) {
+    if (verbose) {
+      message("#Copying Files\n")
+    }
+    tdir = tempfile()
+    dir.create(tdir)
+    file.copy(from = file, to = tdir)
+    file = file.path(tdir, basename(file))
+  }
+  basedir = unique(dirname(file))
+  stopifnot(length(basedir) == 1)
+  
+  res = dcm2nii(basedir = basedir, 
+                copy_files = FALSE, 
+                verbose = verbose, ...)
+  return(res)
+} ## end dcm2nii

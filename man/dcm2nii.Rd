@@ -2,11 +2,15 @@
 % Please edit documentation in R/dcm2nii.R
 \name{dcm2nii}
 \alias{dcm2nii}
+\alias{dcm2nii_par_rec}
 \title{Simple run of DICOM 2 NIfTI Converter}
 \usage{
 dcm2nii(basedir = ".", copy_files = TRUE, progdir = system.file(package =
   "dcm2niir"), verbose = TRUE, dcm2niicmd = c("dcm2niix", "dcm2nii_2009",
   "dcm2nii"), opts = "-z y -f \%p_\%t_\%s", ...)
+
+dcm2nii_par_rec(file = list.files(pattern = "[.](par|PAR)"),
+  copy_files = TRUE, verbose = TRUE, ...)
 }
 \arguments{
 \item{basedir}{(character) directory to get files}
@@ -24,6 +28,8 @@ are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.}
 \item{opts}{list of arguments to pass to \code{dcm2nii}.}
 
 \item{...}{arguments to be passed to \code{\link{system}}}
+
+\item{file}{A Par/REC file}
 }
 \value{
 List of result of \code{system} command, names of files before and after
