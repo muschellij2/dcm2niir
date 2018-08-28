@@ -4,7 +4,8 @@
 \alias{install_dcm2nii}
 \title{Install dcm2nii tools}
 \usage{
-install_dcm2nii(lib.loc = NULL, overwrite = FALSE, from_source = FALSE)
+install_dcm2nii(lib.loc = NULL, overwrite = FALSE,
+  from_source = FALSE)
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.

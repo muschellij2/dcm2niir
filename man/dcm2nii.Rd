@@ -5,9 +5,12 @@
 \alias{dcm2nii_par_rec}
 \title{Simple run of DICOM 2 NIfTI Converter}
 \usage{
-dcm2nii(basedir = ".", copy_files = TRUE, progdir = system.file(package =
-  "dcm2niir"), verbose = TRUE, dcm2niicmd = c("dcm2niix", "dcm2nii_2009",
-  "dcm2nii"), opts = "-z y -f \%p_\%t_\%s", ...)
+dcm2nii(basedir = ".", copy_files = TRUE,
+  progdir = system.file(package = "dcm2niir"), verbose = TRUE,
+  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
+  merge_files = FALSE, ignore_derived = FALSE, opts = paste0("-9 ",
+  ifelse(ignore_derived, "-i y ", ""), ifelse(merge_files, " -m y ", ""),
+  "-z y -f \%p_\%t_\%s"), ...)
 
 dcm2nii_par_rec(file = list.files(pattern = "[.](par|PAR)"),
   copy_files = TRUE, verbose = TRUE, ...)
@@ -24,6 +27,12 @@ binaries were installed elsewhere. Passed to \code{\link{dcm2nii_bin}}.}
 
 \item{dcm2niicmd}{(character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
 are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.}
+
+\item{merge_files}{Should files be merged, 
+passed do \code{dcm2nii} options}
+
+\item{ignore_derived}{Should derived images be ignored,
+passed do \code{dcm2nii} options}
 
 \item{opts}{list of arguments to pass to \code{dcm2nii}.}
 

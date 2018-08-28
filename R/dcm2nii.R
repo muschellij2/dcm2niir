@@ -13,6 +13,10 @@
 #' @param ... arguments to be passed to \code{\link{system}}
 #' @return List of result of \code{system} command, names of files before and after
 #' conversion
+#' @param merge_files Should files be merged, 
+#' passed do \code{dcm2nii} options
+#' @param ignore_derived Should derived images be ignored,
+#' passed do \code{dcm2nii} options
 #' @export
 #' @examples 
 #' library(utils)
@@ -37,7 +41,13 @@ dcm2nii <- function(basedir = ".",
                     progdir = system.file(package = "dcm2niir"), 
                     verbose = TRUE, 
                     dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
-                    opts = "-z y -f %p_%t_%s",
+                    merge_files = FALSE,
+                    ignore_derived = FALSE,
+                    opts = paste0(
+                      "-9 ",
+                      ifelse(ignore_derived, "-i y ", ""),
+                      ifelse(merge_files, " -m y ", ""),
+                      "-z y -f %p_%t_%s"),
                     ...){  
   dcm2niicmd = dcm2nii_bin(
     progdir = progdir,
