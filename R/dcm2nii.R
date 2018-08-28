@@ -20,6 +20,8 @@
 #' @export
 #' @examples 
 #' library(utils)
+#' install_dir = tempdir()
+#' install_dcm2nii(progdir = install_dir)
 #' ## dcm_file = paste0("ftp://medical.nema.org/medical/Dicom/", 
 #' ## "DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/", 
 #' ## "Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm")

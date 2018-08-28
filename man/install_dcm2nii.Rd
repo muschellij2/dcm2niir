@@ -5,7 +5,7 @@
 \title{Install dcm2nii tools}
 \usage{
 install_dcm2nii(lib.loc = NULL, overwrite = FALSE,
-  from_source = FALSE)
+  from_source = FALSE, progdir = NULL)
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.
@@ -16,10 +16,13 @@ Passed to \code{\link{system.file}}}
 \item{from_source}{if this is TRUE, then \code{git} and \code{cmake}
 are required and the current version is cloned from 
 \url{https://github.com/rordenlab/dcm2niix}}
+
+\item{progdir}{Installation directory for executable built}
 }
 \description{
 Install dcm2nii to dcm2niir for conversion tools
 }
 \examples{
-install_dcm2nii()
+install_dir = tempdir()
+install_dcm2nii(progdir = install_dir)
 }

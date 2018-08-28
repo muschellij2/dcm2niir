@@ -8,19 +8,27 @@
 #' @param from_source if this is TRUE, then \code{git} and \code{cmake}
 #' are required and the current version is cloned from 
 #' \url{https://github.com/rordenlab/dcm2niix}
+#' @param progdir Installation directory for executable built
 #' @examples
-#' install_dcm2nii()
+#' install_dir = tempdir()
+#' install_dcm2nii(progdir = install_dir)
 #' @importFrom utils download.file unzip
 #' @importFrom httr stop_for_status GET write_disk progress
 install_dcm2nii = function(lib.loc = NULL,
                            overwrite = FALSE,
-                           from_source = FALSE){
+                           from_source = FALSE,
+                           progdir = NULL){
   
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname, linux = "_linux", darwin = "")
   fname = paste0("dcm2niix", app)
-  dcm2nii_files = system.file(fname,  package = "dcm2niir",
+  install_dir = progdir
+  if (is.null(install_dir)) {
+    install_dir = system.file(package = "dcm2niir",
                               lib.loc = lib.loc)
+  }
+  dcm2nii_files = file.path(install_dir, fname)
+  
   
   if (!file.exists(dcm2nii_files) || overwrite) {
     if (from_source) {
@@ -51,8 +59,7 @@ install_dcm2nii = function(lib.loc = NULL,
         stop("Build didn't result in a binary")
       }
       out_binary = file.path(
-        system.file(package = "dcm2niir",
-                    lib.loc = lib.loc),
+        install_dir,
         "dcm2niix")
       out_binary = paste0(out_binary, app)
       file.copy(binary, to = out_binary, overwrite = overwrite)
@@ -63,28 +70,24 @@ install_dcm2nii = function(lib.loc = NULL,
       url = paste0("https://github.com/muschellij2/dcm2niir/raw", 
                    "/master/dcm2nii_files.zip")
       urlfile <- file.path(
-        system.file(package = "dcm2niir",
-                    lib.loc = lib.loc),
+        install_dir,
         "dcm2nii_files.zip")    
       # download.file(url, urlfile)
-      req = httr::GET(url, 
-                      httr::write_disk(path = urlfile, overwrite = overwrite),
-                      httr::progress())  
+      req = httr::GET(
+        url, 
+        httr::write_disk(path = urlfile, overwrite = overwrite),
+        httr::progress())  
       httr::stop_for_status(req)
       files = unzip(urlfile,
-                    exdir = system.file(
-                      package = "dcm2niir",
-                      lib.loc = lib.loc),
+                    exdir = install_dir,
                     junkpaths = TRUE)
       for (ifile in files) system(sprintf("chmod +x %s", ifile))
       x = file.remove(urlfile)
       rm(x)
     }
   }
-  dcm2nii_files = system.file(
-    fname,
-    package = "dcm2niir",
-    lib.loc = lib.loc)
+  dcm2nii_files = file.path(install_dir, fname)
+  
   return(file.exists(dcm2nii_files))
 }
 

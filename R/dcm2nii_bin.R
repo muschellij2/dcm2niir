@@ -25,7 +25,7 @@ dcm2nii_bin = function(
   dcm2niicmd = file.path(progdir, dcm2niicmd)
   
   if (!file.exists(dcm2niicmd)) {
-    install_dcm2nii()
+    install_dcm2nii(progdir = progdir)
   } 
   stopifnot(file.exists(dcm2niicmd))
   return(dcm2niicmd)
