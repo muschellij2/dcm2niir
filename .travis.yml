@@ -6,6 +6,14 @@ os:
   - linux
   - osx
 
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake-data
+      - cmake
+
 r_check_args: "--as-cran --install-args=--build"
 before_install:
 - echo "TRAVIS BUILD ID"
