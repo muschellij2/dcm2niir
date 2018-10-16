@@ -8,6 +8,7 @@
 #' @param from_source if this is TRUE, then \code{git} and \code{cmake}
 #' are required and the current version is cloned from 
 #' \url{https://github.com/rordenlab/dcm2niix}
+#' @param jpeg install using JPEG utilities
 #' @param progdir Installation directory for executable built
 #' @examples
 #' install_dir = tempdir()
@@ -17,6 +18,7 @@
 install_dcm2nii = function(lib.loc = NULL,
                            overwrite = FALSE,
                            from_source = FALSE,
+                           jpeg = FALSE,
                            progdir = NULL){
   
   sysname = tolower(Sys.info()["sysname"])
@@ -51,7 +53,9 @@ install_dcm2nii = function(lib.loc = NULL,
       make = Sys.which("make")
       cmd = paste0(
         "cd ", build_dir, "; ", 
-        cmake, " ..; ", 
+        cmake, 
+        ifelse(jpeg, "-DUSE_JPEGLS=ON -DUSE_OPENJPEG=ON", ""), 
+        " ..; ", 
         make)
       system(cmd)
       binary = file.path(build_dir, "bin", "dcm2niix")
