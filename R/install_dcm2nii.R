@@ -54,7 +54,7 @@ install_dcm2nii = function(lib.loc = NULL,
       cmd = paste0(
         "cd ", build_dir, "; ", 
         cmake, 
-        ifelse(jpeg, "-DUSE_JPEGLS=ON -DUSE_OPENJPEG=ON", ""), 
+        ifelse(jpeg, " -DUSE_JPEGLS=ON -DUSE_OPENJPEG=ON ", ""), 
         " ..; ", 
         make)
       system(cmd)
