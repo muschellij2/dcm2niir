@@ -18,7 +18,8 @@ dcm2nii_par_rec(file = list.files(pattern = "[.](par|PAR)"),
   copy_files = TRUE, verbose = TRUE, ...)
 
 dcm2nii_bids_sidecar(basedir, progdir = system.file(package =
-  "dcm2niir"), dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"))
+  "dcm2niir"), dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
+  ...)
 
 fix_sidecar(file)
 }

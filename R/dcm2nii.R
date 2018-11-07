@@ -145,13 +145,15 @@ dcm2nii_par_rec <- function(
 dcm2nii_bids_sidecar = function(
   basedir,
   progdir = system.file(package = "dcm2niir"), 
-  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii")
+  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
+  ...
 ) {
   out = dcm2nii(basedir, copy_files = FALSE,
                 progdir = progdir, 
                 opts = "-b o", 
                 verbose = FALSE, 
-                dcm2niicmd = dcm2niicmd)
+                dcm2niicmd = dcm2niicmd,
+                ...)
   files = out$json_after
   if (length(files) > 0) {
     files = sapply(files, fix_sidecar)
