@@ -69,6 +69,10 @@ dcm2nii <- function(basedir = ".",
   l_before = list.files(pattern = "[.]nii", path = basedir, 
                         recursive = TRUE, all.files = TRUE,
                         full.names = TRUE)
+  j_before = list.files(pattern = "[.]json$", 
+                        path = basedir, 
+                        recursive = TRUE, all.files = TRUE,
+                        full.names = TRUE)    
   if (verbose) {
     message("# Converting to nii \n")
   }
@@ -84,12 +88,18 @@ dcm2nii <- function(basedir = ".",
                        path = basedir, 
                        recursive = TRUE, all.files = TRUE,
                        full.names = TRUE)
+  j_after = list.files(pattern = "[.]json$", 
+                       path = basedir, 
+                       recursive = TRUE, all.files = TRUE,
+                       full.names = TRUE)  
   if (res != 0) {
     warning("Result indicated an error!  Please check resutls.")
   }
   return(list(result = res, 
               nii_before = l_before,
               nii_after = l_after,
+              json_after = j_after,
+              json_before = j_before,
               cmd = cmd
   )
   )
@@ -128,3 +138,36 @@ dcm2nii_par_rec <- function(
                 verbose = verbose, ...)
   return(res)
 } ## end dcm2nii
+
+
+#' @rdname dcm2nii
+#' @export
+dcm2nii_bids_sidecar = function(
+  basedir,
+  progdir = system.file(package = "dcm2niir"), 
+  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii")
+) {
+  out = dcm2nii(basedir, copy_files = FALSE,
+                progdir = progdir, 
+                opts = "-b o", 
+                verbose = FALSE, 
+                dcm2niicmd = dcm2niicmd)
+  files = out$json_after
+  if (length(files) > 0) {
+    files = sapply(files, fix_sidecar)
+  }
+  return(files)
+}
+
+#' @rdname dcm2nii
+#' @export
+fix_sidecar = function(file) {
+  xx = readLines(file)
+  bad = !grepl("^\t", xx) & !grepl("^(\\{|\\})", xx)
+  if (any(bad)) {
+    xx = strsplit(paste(xx, collapse = " "), "\t")[[1]]
+    xx = paste(xx, collapse = " ")
+    writeLines(xx, con = file)
+  }
+  return(file)
+}

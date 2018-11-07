@@ -4,11 +4,13 @@
 \alias{check_dcm2nii}
 \title{Check Output from \code{dcm2nii}}
 \usage{
-check_dcm2nii(dcm2nii_output)
+check_dcm2nii(dcm2nii_output, include_json = TRUE)
 }
 \arguments{
 \item{dcm2nii_output}{Output from \code{\link{dcm2nii}} command, must have
 \code{nii_after} element}
+
+\item{include_json}{Include JSON file if in the output?}
 }
 \value{
 Character vector of unique nifti filenames
