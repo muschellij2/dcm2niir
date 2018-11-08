@@ -148,9 +148,22 @@ dcm2nii_bids_sidecar = function(
   dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
   ...
 ) {
+  args = list(...)
+  if (is.null(args$ignore_derived)) {
+    args$ignore_derived = FALSE
+  }
+  if (is.null(args$merge_files)) {
+    args$merge_files = FALSE
+  }
+  opts = c(
+    "-b o",
+    ifelse(args$ignore_derived, "-i y ", ""),
+    ifelse(args$merge_files, " -m y ", "")
+  )
+  opts = paste(opts, collapse =  " ")
   out = dcm2nii(basedir, copy_files = FALSE,
                 progdir = progdir, 
-                opts = "-b o", 
+                opts = opts,
                 verbose = FALSE, 
                 dcm2niicmd = dcm2niicmd,
                 ...)
