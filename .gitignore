@@ -16,6 +16,7 @@ inst/doc
 inst/dcm2nii*
 inst/dcmdump
 inst/scct*.nii.gz
+inst/._*
 inst/__MACOSX
 README$
 

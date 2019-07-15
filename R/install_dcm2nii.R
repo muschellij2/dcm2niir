@@ -73,7 +73,7 @@ install_dcm2nii = function(lib.loc = NULL,
       # url = paste0("https://github.com/muschellij2/cttools/",
       #              "raw/gh-pages/dcm2nii_files.zip")
       url = paste0("https://github.com/muschellij2/dcm2niir/raw", 
-                   "/master/dcm2nii_files.zip")
+                   "/gh-pages/dcm2nii_files.zip")
       urlfile <- file.path(
         install_dir,
         "dcm2nii_files.zip")    

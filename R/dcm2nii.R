@@ -93,7 +93,7 @@ dcm2nii <- function(basedir = ".",
                        recursive = TRUE, all.files = TRUE,
                        full.names = TRUE)  
   if (res != 0) {
-    warning("Result indicated an error!  Please check resutls.")
+    warning("Result indicated an error!  Please check results.")
   }
   return(list(result = res, 
               nii_before = l_before,
