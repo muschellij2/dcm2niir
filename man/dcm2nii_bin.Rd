@@ -15,7 +15,7 @@ binaries were installed elsewhere}
 are different versions of dcm2nii.}
 }
 \value{
-Character vector
+Character vector of path to binary
 }
 \description{
 Wrapper for checking if dcm2nii binaries are installed and 

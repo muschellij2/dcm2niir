@@ -35,7 +35,14 @@
 #' dl = download.file(url = dcm_file, method = method, destfile = destfile)
 #' dl == 0
 #' stopifnot(file.exists(destfile))
-#' stopifnot(file.size(destfile) > 2e5)
+#' fs = file.size(destfile) 
+#' fs
+#' if (fs <= 2e5) {
+#' dl = download.file(url = dcm_file, destfile = destfile, overwrite = TRUE)
+#' }
+#' fs = file.size(destfile) 
+#' fs
+#' stopifnot(fs > 2e5)
 #' list.files(tdir) 
 #' dcm2niir::install_dcm2nii()
 #' res = dcm2niir::dcm2nii(basedir = tdir)

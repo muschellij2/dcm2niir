@@ -6,7 +6,7 @@
 #' binaries were installed elsewhere
 #' @param dcm2niicmd (character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
 #' are different versions of dcm2nii. 
-#' @return Character vector 
+#' @return Character vector of path to binary
 #' @export
 #'
 #' @examples \dontrun{
@@ -19,7 +19,11 @@ dcm2nii_bin = function(
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname,
                linux = "_linux",
+               windows = ".exe",
                darwin = "")
+  if (sysname == "windows" && dcm2niicmd != "dcm2niix") {
+    stop("dcm2niix is the binary command for Windows")
+  }
   dcm2niicmd = match.arg(dcm2niicmd)
   dcm2niicmd = paste0(dcm2niicmd, app)
   dcm2niicmd = file.path(progdir, dcm2niicmd)
