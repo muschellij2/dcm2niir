@@ -35,6 +35,8 @@
 #' dl = download.file(url = dcm_file, method = method, destfile = destfile)
 #' dl == 0
 #' stopifnot(file.exists(destfile))
+#' stopifnot(file.size(destfile) > 2e5)
+#' list.files(tdir) 
 #' dcm2niir::install_dcm2nii()
 #' res = dcm2niir::dcm2nii(basedir = tdir)
 #' stopifnot(res$result == 0)

@@ -13,6 +13,7 @@ addons:
     packages:
       - cmake-data
       - cmake
+      - pigz
 
 r_check_args: "--as-cran --install-args=--build"
 before_install:
