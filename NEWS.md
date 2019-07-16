@@ -1,3 +1,9 @@
+# dcm2niir 0.6.7
+
+* Fixing the example that was failing on Travis.
+* Added a `dcm2niix.exe` output for `dcm2niicmd`.
+
+
 # dcm2niir 0.6.3
 
 * Added a `NEWS.md` file to track changes to the package.
