@@ -77,7 +77,7 @@ stopifnot(file.exists(destfile))
 fs = file.size(destfile) 
 fs
 if (fs <= 2e5) {
-dl = download.file(url = dcm_file, destfile = destfile, overwrite = TRUE)
+dl = download.file(url = dcm_file, destfile = destfile)
 }
 fs = file.size(destfile) 
 fs
