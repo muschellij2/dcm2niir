@@ -12,7 +12,7 @@ dcm2nii(basedir = ".", copy_files = TRUE,
   dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
   merge_files = FALSE, ignore_derived = FALSE, opts = paste0("-9 ",
   ifelse(ignore_derived, "-i y ", ""), ifelse(merge_files, " -m y ", ""),
-  "-z y -f \%p_\%t_\%s"), ...)
+  paste0(" -v ", as.numeric(verbose)), "-z y -f \%p_\%t_\%s"), ...)
 
 dcm2nii_par_rec(file = list.files(pattern = "[.](par|PAR)"),
   copy_files = TRUE, verbose = TRUE, ...)
