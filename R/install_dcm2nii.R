@@ -71,8 +71,13 @@ install_dcm2nii = function(
         message(paste0("cmake is ", cmake))
         message(paste0("make is ", make))
       }
+      owd = getwd()
+      on.exit({
+        setwd(owd)
+      })
+      setwd(build_dir)
       cmd = paste0(
-        "cd ", build_dir, "; ", 
+        # "cd ", build_dir, "; ", 
         cmake, 
         # -DUSE_JPEGLS=ON
         ifelse(jpeg, " -DUSE_OPENJPEG=ON ", ""), 
@@ -83,6 +88,7 @@ install_dcm2nii = function(
         message(paste0("cmd is ", cmd))
       }      
       system(cmd)
+      setwd(owd)
       binary = fs::path(build_dir, "bin", "dcm2niix")
       if (!file.exists(binary)) {
         stop("Build didn't result in a binary")
