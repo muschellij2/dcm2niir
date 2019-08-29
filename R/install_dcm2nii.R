@@ -82,12 +82,17 @@ install_dcm2nii = function(
         # -DUSE_JPEGLS=ON
         ifelse(jpeg, " -DUSE_OPENJPEG=ON ", ""), 
         " ", cmake_opts, 
-        " ", tdir, "; ", 
-        make)
+        " ", tdir)
       if (verbose) {
         message(paste0("cmd is ", cmd))
       }      
       system(cmd)
+      cmd = make
+      if (verbose) {
+        message(paste0("cmd is ", cmd))
+      }         
+      system(cmd)
+      
       setwd(owd)
       binary = fs::path(build_dir, "bin", "dcm2niix")
       if (!file.exists(binary)) {
