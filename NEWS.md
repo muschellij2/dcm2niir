@@ -1,3 +1,7 @@
+# dcm2niir 0.6.8
+
+* Trying to get Windows to work for `dcm2niir` by adding `fs` package.
+
 # dcm2niir 0.6.7
 
 * Fixing the example that was failing on Travis.

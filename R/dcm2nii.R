@@ -27,7 +27,8 @@
 #' install_dcm2nii(
 #' progdir = install_dir, 
 #' overwrite = TRUE,
-#' from_source = TRUE)
+#' from_source = TRUE, 
+#' verbose = 2)
 #' } else {
 #' install_dcm2nii(progdir = install_dir)
 #' }

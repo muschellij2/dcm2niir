@@ -85,7 +85,11 @@ install_dcm2nii = function(
         " ", tdir)
       if (verbose) {
         message(paste0("cmd is ", cmd))
-      }      
+      }
+      if (verbose > 1) {
+        message("listing current directory")
+        print(list.files())
+      }
       system(cmd)
       cmd = make
       if (verbose) {
