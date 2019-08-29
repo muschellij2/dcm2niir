@@ -35,6 +35,8 @@ install_dcm2nii = function(
   if (is.null(install_dir)) {
     install_dir = system.file(package = "dcm2niir",
                               lib.loc = lib.loc)
+  } else {
+    dir.create(install_dir, recursive = TRUE, showWarnings = FALSE)
   }
   dcm2nii_files = fs::path(install_dir, fname)
   
