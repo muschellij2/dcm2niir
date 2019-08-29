@@ -69,7 +69,7 @@ dcm2nii <- function(basedir = ".",
                       ifelse(ignore_derived, "-i y ", ""),
                       ifelse(merge_files, " -m y ", ""),
                       paste0(" -v ", as.numeric(verbose)),
-                      "-z y -f %p_%t_%s"),
+                      " -z y -f %p_%t_%s"),
                     ...){  
   dcm2niicmd = dcm2nii_bin(
     progdir = progdir,
