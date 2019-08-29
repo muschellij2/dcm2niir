@@ -79,7 +79,7 @@ install_dcm2nii = function(
         " ", cmake_opts, 
         " ..; ", 
         make)
-      if (cmd) {
+      if (verbose) {
         message(paste0("cmd is ", cmd))
       }      
       system(cmd)
