@@ -60,7 +60,16 @@ DICOM files to NIfTI format.  Should Need run \code{\link{install_dcm2nii}} befo
 \examples{
 library(utils)
 install_dir = tempdir()
+sysname = tolower(Sys.info()["sysname"])
+cmake = Sys.which("cmake")
+if (file.exists(cmake) && sysname == "windows") {
+install_dcm2nii(
+progdir = install_dir, 
+overwrite = TRUE,
+from_source = TRUE)
+} else {
 install_dcm2nii(progdir = install_dir)
+}
 ## dcm_file = paste0("ftp://medical.nema.org/medical/Dicom/", 
 ## "DataSets/WG30/MGH/MR/MouseBrainSiemens15T_20150410/", 
 ## "Converted/DICOM/mghmousetoenhancedmr_T1w_pre.dcm")
