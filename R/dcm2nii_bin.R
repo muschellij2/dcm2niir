@@ -21,12 +21,12 @@ dcm2nii_bin = function(
                linux = "_linux",
                windows = ".exe",
                darwin = "")
+  dcm2niicmd = match.arg(dcm2niicmd)
   if (sysname == "windows" && dcm2niicmd != "dcm2niix") {
     stop("dcm2niix is the binary command for Windows")
   }
-  dcm2niicmd = match.arg(dcm2niicmd)
   dcm2niicmd = paste0(dcm2niicmd, app)
-  dcm2niicmd = file.path(progdir, dcm2niicmd)
+  dcm2niicmd = fs::path(progdir, dcm2niicmd)
   
   if (!file.exists(dcm2niicmd)) {
     install_dcm2nii(progdir = progdir)

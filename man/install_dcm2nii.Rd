@@ -6,7 +6,7 @@
 \usage{
 install_dcm2nii(lib.loc = NULL, overwrite = FALSE,
   from_source = FALSE, jpeg = FALSE, progdir = NULL,
-  cmake_opts = "")
+  cmake_opts = "", verbose = TRUE)
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.
@@ -24,6 +24,8 @@ are required and the current version is cloned from
 
 \item{cmake_opts}{Additional options to pass to \code{cmake}, like 
 \code{-DZLIB_IMPLEMENTATION=Cloudflare}}
+
+\item{verbose}{print diagnostic messages}
 }
 \description{
 Install dcm2nii to dcm2niir for conversion tools

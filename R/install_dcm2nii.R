@@ -12,18 +12,21 @@
 #' @param progdir Installation directory for executable built
 #' @param cmake_opts Additional options to pass to \code{cmake}, like 
 #' \code{-DZLIB_IMPLEMENTATION=Cloudflare}
+#' @param verbose print diagnostic messages
 #' @examples
 #' install_dir = tempdir()
 #' install_dcm2nii(progdir = install_dir)
 #' @importFrom utils download.file unzip
 #' @importFrom fs path fs_path
 #' @importFrom httr stop_for_status GET write_disk progress
-install_dcm2nii = function(lib.loc = NULL,
-                           overwrite = FALSE,
-                           from_source = FALSE,
-                           jpeg = FALSE,
-                           progdir = NULL,
-                           cmake_opts = ""){
+install_dcm2nii = function(
+  lib.loc = NULL,
+  overwrite = FALSE,
+  from_source = FALSE,
+  jpeg = FALSE,
+  progdir = NULL,
+  cmake_opts = "", 
+  verbose = TRUE){
   
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname, linux = "_linux", darwin = "")
@@ -62,6 +65,12 @@ install_dcm2nii = function(lib.loc = NULL,
       }      
       cmake = Sys.which("cmake")
       make = Sys.which("make")
+      cmake = fs::fs_path(cmake)
+      make = fs::fs_path(make)
+      if (verbose) {
+        message(paste0("cmake is ", cmake))
+        message(paste0("make is ", make))
+      }
       cmd = paste0(
         "cd ", build_dir, "; ", 
         cmake, 
@@ -70,6 +79,9 @@ install_dcm2nii = function(lib.loc = NULL,
         " ", cmake_opts, 
         " ..; ", 
         make)
+      if (cmd) {
+        message(paste0("cmd is ", cmd))
+      }      
       system(cmd)
       binary = fs::path(build_dir, "bin", "dcm2niix")
       if (!file.exists(binary)) {
