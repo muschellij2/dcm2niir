@@ -1,7 +1,7 @@
 Package: dcm2niir
 Type: Package
 Title: Conversion of 'DICOM' to 'NIfTI' Imaging Files Through R
-Version: 0.6.7.3
+Version: 0.6.7.4
 Date: 2019-08-22
 Authors@R: c(person(given = "John", family = "Muschelli", 
     role = c("aut", "cre"), email = "muschellij2@gmail.com"))
@@ -17,7 +17,8 @@ Depends:
 Imports:
     dplyr,
     utils,
-    httr
+    httr,
+    fs
 License: GPL-3
 SystemRequirements: dcm2niix (https://github.com/rordenlab/dcm2niix)
 BugReports: https://github.com/muschellij2/dcm2niir/issues,
@@ -27,6 +28,7 @@ RoxygenNote: 6.1.1
 Suggests: 
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    git2r
 VignetteBuilder: knitr
 Encoding: UTF-8

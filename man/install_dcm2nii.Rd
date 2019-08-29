@@ -5,7 +5,8 @@
 \title{Install dcm2nii tools}
 \usage{
 install_dcm2nii(lib.loc = NULL, overwrite = FALSE,
-  from_source = FALSE, jpeg = FALSE, progdir = NULL)
+  from_source = FALSE, jpeg = FALSE, progdir = NULL,
+  cmake_opts = "")
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.
@@ -20,6 +21,9 @@ are required and the current version is cloned from
 \item{jpeg}{install using JPEG utilities}
 
 \item{progdir}{Installation directory for executable built}
+
+\item{cmake_opts}{Additional options to pass to \code{cmake}, like 
+\code{-DZLIB_IMPLEMENTATION=Cloudflare}}
 }
 \description{
 Install dcm2nii to dcm2niir for conversion tools

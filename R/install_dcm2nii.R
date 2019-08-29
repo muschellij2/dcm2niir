@@ -10,16 +10,20 @@
 #' \url{https://github.com/rordenlab/dcm2niix}
 #' @param jpeg install using JPEG utilities
 #' @param progdir Installation directory for executable built
+#' @param cmake_opts Additional options to pass to \code{cmake}, like 
+#' \code{-DZLIB_IMPLEMENTATION=Cloudflare}
 #' @examples
 #' install_dir = tempdir()
 #' install_dcm2nii(progdir = install_dir)
 #' @importFrom utils download.file unzip
+#' @importFrom fs path fs_path
 #' @importFrom httr stop_for_status GET write_disk progress
 install_dcm2nii = function(lib.loc = NULL,
                            overwrite = FALSE,
                            from_source = FALSE,
                            jpeg = FALSE,
-                           progdir = NULL){
+                           progdir = NULL,
+                           cmake_opts = ""){
   
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname, linux = "_linux", darwin = "")
@@ -29,23 +33,30 @@ install_dcm2nii = function(lib.loc = NULL,
     install_dir = system.file(package = "dcm2niir",
                               lib.loc = lib.loc)
   }
-  dcm2nii_files = file.path(install_dir, fname)
+  dcm2nii_files = fs::path(install_dir, fname)
   
   
   if (!file.exists(dcm2nii_files) || overwrite) {
     if (from_source) {
       tdir = tempfile()
+      tdir = fs::fs_path(tdir)
       if (!dir.exists(tdir)) {
         dir.create(tdir)
       }
-      git = Sys.which("git")
-      cmd = paste0(
-        git, 
-        " clone ", 
-        "https://github.com/rordenlab/dcm2niix ",
-        tdir)
-      system(cmd)
-      build_dir = file.path(tdir, "build")
+      git_url = "https://github.com/rordenlab/dcm2niix"
+      if (requireNamespace("git2r", quietly = TRUE)) {
+        git2r::clone(git_url, local_path = tdir)
+      } else {
+        git = Sys.which("git")
+        cmd = paste0(
+          git, 
+          " clone ", 
+          git_url,
+          " ",
+          tdir)
+        system(cmd)
+      }
+      build_dir = fs::path(tdir, "build")
       if (!dir.exists(build_dir)) {
         dir.create(build_dir)
       }      
@@ -56,14 +67,15 @@ install_dcm2nii = function(lib.loc = NULL,
         cmake, 
         # -DUSE_JPEGLS=ON
         ifelse(jpeg, " -DUSE_OPENJPEG=ON ", ""), 
+        " ", cmake_opts, 
         " ..; ", 
         make)
       system(cmd)
-      binary = file.path(build_dir, "bin", "dcm2niix")
+      binary = fs::path(build_dir, "bin", "dcm2niix")
       if (!file.exists(binary)) {
         stop("Build didn't result in a binary")
       }
-      out_binary = file.path(
+      out_binary = fs::path(
         install_dir,
         "dcm2niix")
       out_binary = paste0(out_binary, app)
@@ -74,7 +86,7 @@ install_dcm2nii = function(lib.loc = NULL,
       #              "raw/gh-pages/dcm2nii_files.zip")
       url = paste0("https://github.com/muschellij2/dcm2niir/raw", 
                    "/gh-pages/dcm2nii_files.zip")
-      urlfile <- file.path(
+      urlfile <- fs::path(
         install_dir,
         "dcm2nii_files.zip")    
       # download.file(url, urlfile)
@@ -91,7 +103,7 @@ install_dcm2nii = function(lib.loc = NULL,
       rm(x)
     }
   }
-  dcm2nii_files = file.path(install_dir, fname)
+  dcm2nii_files = fs::path(install_dir, fname)
   
   return(file.exists(dcm2nii_files))
 }

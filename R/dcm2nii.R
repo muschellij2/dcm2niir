@@ -63,12 +63,14 @@ dcm2nii <- function(basedir = ".",
   dcm2niicmd = dcm2nii_bin(
     progdir = progdir,
     dcm2niicmd = dcm2niicmd)
+  dcm2niicmd = fs::fs_path(dcm2niicmd)
   basedir = path.expand(basedir)
   if (copy_files) {
     if (verbose) {
       message("#Copying Files\n")
     }
     tdir = tempfile()
+    tdir = fs::fs_path(tdir)
     dir.create(tdir)
     l = list.files(path = basedir, recursive = TRUE, all.files = TRUE,
                    full.names = TRUE)
