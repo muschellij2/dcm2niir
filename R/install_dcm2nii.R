@@ -116,6 +116,9 @@ install_dcm2nii = function(
     }
   }
   dcm2nii_files = fs::path(install_dir, fname)
+  if (verbose > 1) {
+    message("dcm2nii_files is ", dcm2nii_files)  
+  }
   
   return(file.exists(dcm2nii_files))
 }

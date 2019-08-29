@@ -15,7 +15,8 @@ test_that("install_dcm2nii source", {
   if (file.exists(cmake)) {
     install_dcm2nii(progdir = install_dir, 
                     from_source = TRUE,
-                    overwrite = TRUE)
+                    overwrite = TRUE,
+                    verbose = TRUE)
     expect_true(install_dcm2nii(progdir = install_dir))
   }
 })
