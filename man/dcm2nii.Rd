@@ -62,7 +62,7 @@ library(utils)
 install_dir = tempdir()
 sysname = tolower(Sys.info()["sysname"])
 cmake = Sys.which("cmake")
-if (file.exists(cmake) && sysname == "windows") {
+if (file.exists(cmake) && sysname == "windows" && FALSE) {
 install_dcm2nii(
 progdir = install_dir, 
 overwrite = TRUE,
@@ -94,6 +94,6 @@ fs
 stopifnot(fs > 2e5)
 list.files(tdir) 
 dcm2niir::install_dcm2nii()
-res = dcm2niir::dcm2nii(basedir = tdir)
+res = dcm2niir::dcm2nii(basedir = tdir, verbose = 1)
 stopifnot(res$result == 0)
 }
