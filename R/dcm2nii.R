@@ -25,7 +25,7 @@
 #' cmake = Sys.which("cmake")
 #' if (file.exists(cmake) && sysname == "windows" && 
 #' nzchar(Sys.getenv("APPVEYOR"))) {
-#' source_clone_dir = fs::path(Sys.geten("APPVEYOR_BUILD_FOLDER"),
+#' source_clone_dir = fs::path(Sys.getenv("APPVEYOR_BUILD_FOLDER"),
 #' "inst", "dcm2niix_clone")
 #' install_dcm2nii(
 #' progdir = install_dir, 
