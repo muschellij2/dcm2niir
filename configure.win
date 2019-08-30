@@ -35,7 +35,7 @@ fi
 echo ${cmaker}
 
 ${cmaker} \
-    -G "MinGW Makefiles" \
+    -G "Unix Makefiles" \
  	-DCMAKE_INSTALL_PREFIX:PATH=${R_PACKAGE_DIR} \
     -DCMAKE_SH:BOOL=OFF \
     ../
