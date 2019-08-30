@@ -23,7 +23,7 @@
 #' install_dir = tempdir()
 #' sysname = tolower(Sys.info()["sysname"])
 #' cmake = Sys.which("cmake")
-#' if (file.exists(cmake) && sysname == "windows" && FALSE) {
+#' if (file.exists(cmake) && sysname == "windows") {
 #' install_dcm2nii(
 #' progdir = install_dir, 
 #' overwrite = TRUE,

@@ -67,6 +67,9 @@ install_dcm2nii = function(
       }      
       cmake = Sys.which("cmake")
       make = Sys.which("make")
+      if (sysname == "windows") {
+        make = Sys.which("mingw32-make")
+      }
       cmake = fs::fs_path(cmake)
       make = fs::fs_path(make)
       if (verbose) {
