@@ -36,6 +36,6 @@ echo ${cmaker}
 
 ${cmaker} \
     -G "Unix Makefiles" \
- 	-DCMAKE_INSTALL_PREFIX:PATH=${R_PACKAGE_DIR} \
+ 	-DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}" \
     -DCMAKE_SH:BOOL=OFF \
     ../
