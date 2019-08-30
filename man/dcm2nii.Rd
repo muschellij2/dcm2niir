@@ -62,12 +62,16 @@ library(utils)
 install_dir = tempdir()
 sysname = tolower(Sys.info()["sysname"])
 cmake = Sys.which("cmake")
-if (file.exists(cmake) && sysname == "windows") {
+if (file.exists(cmake) && sysname == "windows" && 
+nzchar(Sys.getenv("APPVEYOR"))) {
+source_clone_dir = fs::path(Sys.geten("APPVEYOR_BUILD_FOLDER"),
+"inst", "dcm2niix_clone")
 install_dcm2nii(
 progdir = install_dir, 
 overwrite = TRUE,
 from_source = TRUE, 
-verbose = 2)
+verbose = 2,
+source_clone_dir = source_clone_dir)
 } else {
 install_dcm2nii(progdir = install_dir)
 }

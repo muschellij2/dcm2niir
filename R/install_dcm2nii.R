@@ -13,6 +13,8 @@
 #' @param cmake_opts Additional options to pass to \code{cmake}, like 
 #' \code{-DZLIB_IMPLEMENTATION=Cloudflare}
 #' @param verbose print diagnostic messages
+#' @param source_clone_dir experimental, where the file should be cloned if 
+#' source install.  Do not use unless you know what you're doing.
 #' @examples
 #' install_dir = tempdir()
 #' install_dcm2nii(progdir = install_dir)
@@ -26,7 +28,8 @@ install_dcm2nii = function(
   jpeg = FALSE,
   progdir = NULL,
   cmake_opts = "", 
-  verbose = TRUE){
+  verbose = TRUE,
+  source_clone_dir = NULL){
   
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname, linux = "_linux", darwin = "")
@@ -43,7 +46,11 @@ install_dcm2nii = function(
   
   if (!file.exists(dcm2nii_files) || overwrite) {
     if (from_source) {
-      tdir = tempfile()
+      if (is.null(source_clone_dir)) {
+        tdir = tempfile()
+      } else {
+        tdir = source_clone_dir
+      }
       tdir = fs::fs_path(tdir)
       if (!dir.exists(tdir)) {
         dir.create(tdir)
@@ -67,9 +74,9 @@ install_dcm2nii = function(
       }      
       cmake = Sys.which("cmake")
       make = Sys.which("make")
-      if (sysname == "windows") {
-        make = Sys.which("mingw32-make")
-      }
+      # if (sysname == "windows") {
+      #   make = Sys.which("mingw32-make")
+      # }
       cmake = fs::fs_path(cmake)
       make = fs::fs_path(make)
       if (verbose) {

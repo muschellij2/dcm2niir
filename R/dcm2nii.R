@@ -23,12 +23,16 @@
 #' install_dir = tempdir()
 #' sysname = tolower(Sys.info()["sysname"])
 #' cmake = Sys.which("cmake")
-#' if (file.exists(cmake) && sysname == "windows") {
+#' if (file.exists(cmake) && sysname == "windows" && 
+#' nzchar(Sys.getenv("APPVEYOR"))) {
+#' source_clone_dir = fs::path(Sys.geten("APPVEYOR_BUILD_FOLDER"),
+#' "inst", "dcm2niix_clone")
 #' install_dcm2nii(
 #' progdir = install_dir, 
 #' overwrite = TRUE,
 #' from_source = TRUE, 
-#' verbose = 2)
+#' verbose = 2,
+#' source_clone_dir = source_clone_dir)
 #' } else {
 #' install_dcm2nii(progdir = install_dir)
 #' }
@@ -57,20 +61,21 @@
 #' dcm2niir::install_dcm2nii()
 #' res = dcm2niir::dcm2nii(basedir = tdir, verbose = 1)
 #' stopifnot(res$result == 0)
-dcm2nii <- function(basedir = ".", 
-                    copy_files = TRUE,
-                    progdir = system.file(package = "dcm2niir"), 
-                    verbose = TRUE, 
-                    dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
-                    merge_files = FALSE,
-                    ignore_derived = FALSE,
-                    opts = paste0(
-                      "-9 ",
-                      ifelse(ignore_derived, "-i y ", ""),
-                      ifelse(merge_files, " -m y ", ""),
-                      paste0(" -v ", as.numeric(verbose)),
-                      " -z y -f %p_%t_%s"),
-                    ...){  
+dcm2nii <- function(
+  basedir = ".", 
+  copy_files = TRUE,
+  progdir = system.file(package = "dcm2niir"), 
+  verbose = TRUE, 
+  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
+  merge_files = FALSE,
+  ignore_derived = FALSE,
+  opts = paste0(
+    "-9 ",
+    ifelse(ignore_derived, "-i y ", ""),
+    ifelse(merge_files, " -m y ", ""),
+    paste0(" -v ", as.numeric(verbose)),
+    " -z y -f %p_%t_%s"),
+  ...){  
   dcm2niicmd = dcm2nii_bin(
     progdir = progdir,
     dcm2niicmd = dcm2niicmd)
