@@ -10,11 +10,11 @@ if [ -z "${git_exe}" ]; then
     str="repo = git2r::clone(\""
     str="${str}${git_url}"
     str="${str}\", local_path = \"./dcm2niix\")"
-	${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "${str}"
-	cd dcm2niix
+    ${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "${str}"
+    cd dcm2niix
 else
-	git clone $git_url dcm2niix
-	cd dcm2niix
+    git clone $git_url dcm2niix
+    cd dcm2niix
 fi
 rm -rf .git
 mkdir build
@@ -25,7 +25,7 @@ if [ -z "${cmaker}" ]; then
     res=`${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "cat(('cmaker' %in% installed.packages())*1)"`
     if [ $res -eq 0 ]; 
     then     
- 	    ${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "remotes::install_github('stnava/cmaker')"
+        ${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "remotes::install_github('stnava/cmaker')"
     fi
     cmaker=`${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe -e "x=cmaker::cmake()"`
 else 
@@ -35,7 +35,7 @@ fi
 echo ${cmaker}
 
 ${cmaker} \
-    -G "Unix Makefiles" \
- 	-DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}" \
+    -G "MinGW Makefiles" \
+    -DCMAKE_INSTALL_PREFIX:PATH="${R_PACKAGE_DIR}" \
     -DCMAKE_SH:BOOL=OFF \
     ../
