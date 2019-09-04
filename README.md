@@ -13,3 +13,4 @@ Install in `R` using `devtools`:
 ```
 devtools::install_github("muschellij2/dcm2niir")
 ```
+
