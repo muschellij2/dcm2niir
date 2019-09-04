@@ -19,4 +19,5 @@ inst/scct*.nii.gz
 inst/._*
 inst/__MACOSX
 README$
+configure.win.test
 
