@@ -85,13 +85,14 @@ dir.create(tdir)
 destfile = tempfile(fileext = ".dcm", tmpdir = tdir)
 ci = Sys.getenv("CI")
 method = ifelse(ci == "", "auto", "curl")
-dl = download.file(url = dcm_file, method = method, destfile = destfile)
+dl = download.file(url = dcm_file, method = method, 
+destfile = destfile, mode = "wb")
 dl == 0
 stopifnot(file.exists(destfile))
 fs = file.size(destfile) 
 fs
 if (fs <= 2e5) {
-dl = download.file(url = dcm_file, destfile = destfile)
+dl = download.file(url = dcm_file, destfile = destfile, mode = "wb")
 }
 fs = file.size(destfile) 
 fs

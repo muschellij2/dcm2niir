@@ -28,7 +28,8 @@ dir.create(tdir)
 destfile = tempfile(fileext = ".dcm", tmpdir = tdir)
 ci = Sys.getenv("CI")
 method = ifelse(ci == "", "auto", "curl")
-dl = download.file(url = dcm_file, method = method, destfile = destfile)
+dl = download.file(url = dcm_file, method = method, 
+                   destfile = destfile, mode = "wb")
 dl == 0
 file.exists(destfile)
 ```
