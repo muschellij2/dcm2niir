@@ -59,7 +59,7 @@
 #' fs
 #' stopifnot(fs > 2e5)
 #' list.files(tdir) 
-#' dcm2niir::install_dcm2nii()
+#' dcm2niir::install_dcm2nii(progdir = install_dir)
 #' res = dcm2niir::dcm2nii(basedir = tdir, verbose = 1)
 #' stopifnot(res$result == 0)
 dcm2nii <- function(

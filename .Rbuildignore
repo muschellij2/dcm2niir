@@ -13,3 +13,4 @@ inst/__MACOSX
 README$
 makefile$
 
+^configure\.win\.test$
