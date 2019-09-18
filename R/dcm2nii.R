@@ -3,6 +3,8 @@
 #' http://www.mccauslandcenter.sc.edu/mricro/mricron/dcm2nii.html to convert
 #' DICOM files to NIfTI format.  Should Need run \code{\link{install_dcm2nii}} before running.
 #' @param basedir (character) directory to get files
+#' @param files (character) vector of files to segment.  Will override
+#' \code{basedir} if used
 #' @param copy_files (logical) Should files be copied to a temporary directory?
 #' @param progdir (character) directory of bash scripts, no user input needed unless
 #' binaries were installed elsewhere. Passed to \code{\link{dcm2nii_bin}}.
@@ -64,6 +66,7 @@
 #' stopifnot(res$result == 0)
 dcm2nii <- function(
   basedir = ".", 
+  files = NULL,
   copy_files = TRUE,
   progdir = system.file(package = "dcm2niir"), 
   verbose = TRUE, 
@@ -81,17 +84,27 @@ dcm2nii <- function(
     progdir = progdir,
     dcm2niicmd = dcm2niicmd)
   dcm2niicmd = fs::fs_path(dcm2niicmd)
+  if (!is.null(files) & !copy_files) {
+    warning("copy_files is FALSE, but files are given, copy_files = TRUE")
+    copy_files = TRUE
+  }
   basedir = path.expand(basedir)
   if (copy_files) {
     if (verbose) {
       message("#Copying Files\n")
     }
     tdir = tempfile()
-    tdir = fs::fs_path(tdir)
+    tdir = fs::fs_path(tdir)    
     dir.create(tdir)
-    l = list.files(path = basedir, recursive = TRUE, all.files = TRUE,
-                   full.names = TRUE)
-    file.copy(from = l, to = tdir)
+    if (is.null(files)) {
+      l = list.files(path = basedir, recursive = TRUE, all.files = TRUE,
+                     full.names = TRUE)
+      file.copy(from = l, to = tdir)
+    } else {
+      outfiles = file.path(tdir, basename(files))
+      file.copy(from = files, to = outfiles)
+      files = outfiles
+    }
     basedir = tdir
   }
   l_before = list.files(pattern = "[.]nii", path = basedir, 

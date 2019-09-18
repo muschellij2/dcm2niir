@@ -7,7 +7,7 @@
 \alias{fix_sidecar}
 \title{Simple run of DICOM 2 NIfTI Converter}
 \usage{
-dcm2nii(basedir = ".", copy_files = TRUE,
+dcm2nii(basedir = ".", files = NULL, copy_files = TRUE,
   progdir = system.file(package = "dcm2niir"), verbose = TRUE,
   dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
   merge_files = FALSE, ignore_derived = FALSE, opts = paste0("-9 ",
@@ -25,6 +25,9 @@ fix_sidecar(file)
 }
 \arguments{
 \item{basedir}{(character) directory to get files}
+
+\item{files}{(character) vector of files to segment.  Will override
+\code{basedir} if used}
 
 \item{copy_files}{(logical) Should files be copied to a temporary directory?}
 
