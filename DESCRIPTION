@@ -18,7 +18,8 @@ Imports:
     dplyr,
     utils,
     httr,
-    fs
+    fs,
+    R.utils
 License: GPL-3
 SystemRequirements: dcm2niix (https://github.com/rordenlab/dcm2niix)
 BugReports: https://github.com/muschellij2/dcm2niir/issues,
@@ -32,4 +33,3 @@ Suggests:
     git2r
 VignetteBuilder: knitr
 Encoding: UTF-8
-
