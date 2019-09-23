@@ -10,9 +10,10 @@
 dcm2nii(basedir = ".", files = NULL, copy_files = TRUE,
   progdir = system.file(package = "dcm2niir"), verbose = TRUE,
   dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
-  merge_files = FALSE, ignore_derived = FALSE, opts = paste0("-9 ",
-  ifelse(ignore_derived, "-i y ", ""), ifelse(merge_files, " -m y ", ""),
-  paste0(" -v ", as.numeric(verbose)), " -z y -f \%p_\%t_\%s"), ...)
+  merge_files = FALSE, ignore_derived = FALSE, unzip_files = TRUE,
+  opts = paste0("-9 ", ifelse(ignore_derived, "-i y ", ""),
+  ifelse(merge_files, " -m y ", ""), paste0(" -v ", as.numeric(verbose)),
+  " -z y -f \%p_\%t_\%s"), ...)
 
 dcm2nii_par_rec(file = list.files(pattern = "[.](par|PAR)"),
   copy_files = TRUE, verbose = TRUE, ...)
@@ -44,6 +45,9 @@ passed do \code{dcm2nii} options}
 
 \item{ignore_derived}{Should derived images be ignored,
 passed do \code{dcm2nii} options}
+
+\item{unzip_files}{if \code{TRUE}, any file with \code{.gz} extension
+will be unzipped}
 
 \item{opts}{list of arguments to pass to \code{dcm2nii}.}
 
@@ -103,5 +107,11 @@ stopifnot(fs > 2e5)
 list.files(tdir) 
 dcm2niir::install_dcm2nii(progdir = install_dir)
 res = dcm2niir::dcm2nii(basedir = tdir, verbose = 1)
+stopifnot(res$result == 0)
+res = dcm2niir::dcm2nii(files = destfile, verbose = 1)
+destfile = R.utils::gzip(destfile)
+res = dcm2niir::dcm2nii(files = destfile, verbose = 1, unzip_files = FALSE)
+stopifnot(res$result != 0)
+res = dcm2niir::dcm2nii(files = destfile, verbose = 1, unzip_files = TRUE)
 stopifnot(res$result == 0)
 }

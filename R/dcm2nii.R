@@ -17,6 +17,8 @@
 #' conversion
 #' @param merge_files Should files be merged, 
 #' passed do \code{dcm2nii} options
+#' @param unzip_files if \code{TRUE}, any file with \code{.gz} extension
+#' will be unzipped
 #' @param ignore_derived Should derived images be ignored,
 #' passed do \code{dcm2nii} options
 #' @export
@@ -64,6 +66,12 @@
 #' dcm2niir::install_dcm2nii(progdir = install_dir)
 #' res = dcm2niir::dcm2nii(basedir = tdir, verbose = 1)
 #' stopifnot(res$result == 0)
+#' res = dcm2niir::dcm2nii(files = destfile, verbose = 1)
+#' destfile = R.utils::gzip(destfile)
+#' res = dcm2niir::dcm2nii(files = destfile, verbose = 1, unzip_files = FALSE)
+#' stopifnot(res$result != 0)
+#' res = dcm2niir::dcm2nii(files = destfile, verbose = 1, unzip_files = TRUE)
+#' stopifnot(res$result == 0)
 dcm2nii <- function(
   basedir = ".", 
   files = NULL,
@@ -73,6 +81,7 @@ dcm2nii <- function(
   dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
   merge_files = FALSE,
   ignore_derived = FALSE,
+  unzip_files = TRUE,
   opts = paste0(
     "-9 ",
     ifelse(ignore_derived, "-i y ", ""),
@@ -100,10 +109,23 @@ dcm2nii <- function(
       l = list.files(path = basedir, recursive = TRUE, all.files = TRUE,
                      full.names = TRUE)
       file.copy(from = l, to = tdir)
+      if (unzip_files) {
+        l = file.path(tdir, basename(l))
+        l = l[ grepl(".gz$", tolower(l))]
+        if (length(l) > 0) {
+          sapply(l, R.utils::gunzip, remove = TRUE)
+        }
+      }      
     } else {
       outfiles = file.path(tdir, basename(files))
       file.copy(from = files, to = outfiles)
       files = outfiles
+      if (unzip_files) {
+        l = files[ grepl(".gz$", tolower(files))]
+        if (length(l) > 0) {
+          sapply(l, R.utils::gunzip, remove = TRUE)
+        }
+      }       
     }
     basedir = tdir
   }
