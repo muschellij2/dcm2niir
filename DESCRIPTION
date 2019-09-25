@@ -33,3 +33,4 @@ Suggests:
     git2r
 VignetteBuilder: knitr
 Encoding: UTF-8
+
