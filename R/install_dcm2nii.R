@@ -15,6 +15,7 @@
 #' @param verbose print diagnostic messages
 #' @param source_clone_dir experimental, where the file should be cloned if 
 #' source install.  Do not use unless you know what you're doing.
+#' @param git_url URL of \code{git} repository used for building from source
 #' @examples
 #' install_dir = tempdir()
 #' install_dcm2nii(progdir = install_dir)
@@ -29,7 +30,8 @@ install_dcm2nii = function(
   progdir = NULL,
   cmake_opts = "", 
   verbose = TRUE,
-  source_clone_dir = NULL){
+  source_clone_dir = NULL,
+  git_url = "https://github.com/rordenlab/dcm2niix"){
   
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname, linux = "_linux", darwin = "")
@@ -55,9 +57,10 @@ install_dcm2nii = function(
       if (!dir.exists(tdir)) {
         dir.create(tdir)
       }
-      git_url = "https://github.com/rordenlab/dcm2niix"
+      sha = NULL
       if (requireNamespace("git2r", quietly = TRUE)) {
-        git2r::clone(git_url, local_path = tdir)
+        repository = git2r::clone(git_url, local_path = tdir)
+        sha = git2r::commits(repository)[[1]]$sha
       } else {
         git = Sys.which("git")
         cmd = paste0(
@@ -67,6 +70,12 @@ install_dcm2nii = function(
           " ",
           tdir)
         system(cmd)
+        cmd = paste0(
+          git, 
+          " -C ", tdir, " log -1")
+        sha = system(cmd, intern = TRUE)
+        sha = sub("commit", "", sha[[1]])
+        sha = trimws(sha)
       }
       build_dir = fs::path(tdir, "build")
       if (!dir.exists(build_dir)) {
@@ -119,6 +128,11 @@ install_dcm2nii = function(
         "dcm2niix")
       out_binary = paste0(out_binary, app)
       file.copy(binary, to = out_binary, overwrite = overwrite)
+      if (verbose) {
+        if (!is.null(sha)) {
+          message(paste0("sha is ", sha))
+        }
+      }      
     } else {
       # url = "http://muschellij2.github.io/cttools/dcm2nii_files.zip"
       # url = paste0("https://github.com/muschellij2/cttools/",

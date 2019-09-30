@@ -6,7 +6,8 @@
 \usage{
 install_dcm2nii(lib.loc = NULL, overwrite = FALSE,
   from_source = FALSE, jpeg = FALSE, progdir = NULL,
-  cmake_opts = "", verbose = TRUE, source_clone_dir = NULL)
+  cmake_opts = "", verbose = TRUE, source_clone_dir = NULL,
+  git_url = "https://github.com/rordenlab/dcm2niix")
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.
@@ -29,6 +30,8 @@ are required and the current version is cloned from
 
 \item{source_clone_dir}{experimental, where the file should be cloned if 
 source install.  Do not use unless you know what you're doing.}
+
+\item{git_url}{URL of \code{git} repository used for building from source}
 }
 \description{
 Install dcm2nii to dcm2niir for conversion tools
