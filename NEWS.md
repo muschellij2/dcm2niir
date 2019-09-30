@@ -1,3 +1,8 @@
+# dcm2niir 0.6.9
+
+* Allowed `git_url` in `install_dcm2nii`.
+* Added `short` argument for parsing the `dcm2nii_version`.
+
 # dcm2niir 0.6.8
 
 * Trying to get Windows to work for `dcm2niir` by adding `fs` package.

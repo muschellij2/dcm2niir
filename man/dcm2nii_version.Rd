@@ -4,10 +4,12 @@
 \alias{dcm2nii_version}
 \title{dcm2nii version}
 \usage{
-dcm2nii_version(...)
+dcm2nii_version(..., short = FALSE)
 }
 \arguments{
 \item{...}{Arguments passed to \code{\link{dcm2nii_bin}}.}
+
+\item{short}{report back a short version.}
 }
 \value{
 A character string of the version
