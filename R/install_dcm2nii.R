@@ -112,6 +112,11 @@ install_dcm2nii = function(
         print(list.files())
       }
       system(cmd)
+      if (verbose > 1) {      
+        cml = list.files(pattern = "CMakeLists.txt", 
+                         recursive = TRUE, path = build_dir)
+        print(cml)
+      }
       cmd = make
       if (verbose) {
         message(paste0("cmd is ", cmd))
