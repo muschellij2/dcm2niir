@@ -109,10 +109,19 @@ install_dcm2nii = function(
       }
       if (verbose > 1) {
         message("listing current directory")
+        print(getwd())
         print(list.files())
+        message("listing build dir")
+        print(list.files(dir, recursive = TRUE))
       }
       system(cmd)
-      if (verbose > 1) {      
+      if (verbose > 1) {  
+        message("listing current directory")
+        print(getwd())
+        print(list.files())        
+        message("listing build dir")
+        print(list.files(build_dir))
+        print("CMakeLists")
         cml = list.files(pattern = "CMakeLists.txt", 
                          recursive = TRUE, path = build_dir)
         print(cml)
