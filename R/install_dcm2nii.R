@@ -98,7 +98,9 @@ install_dcm2nii = function(
       })
       cmake_flags = ""
       if (sysname == "windows") {
-        cmake_flags = c(cmake_flags, '-G "MinGW Makefiles"')
+        cmake_flags = c(cmake_flags, 
+                        '-G "Unix Makefiles"',
+                        "-DCMAKE_SH:BOOL=OFF")
       }
       cmake_flags = paste(cmake_flags, collapse = " ")
       setwd(build_dir)
