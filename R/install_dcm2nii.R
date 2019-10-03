@@ -53,7 +53,7 @@ install_dcm2nii = function(
       } else {
         tdir = source_clone_dir
       }
-      tdir = fs::fs_path(tdir)
+      tdir = fs::path_abs(tdir)
       if (!dir.exists(tdir)) {
         dir.create(tdir)
       }
