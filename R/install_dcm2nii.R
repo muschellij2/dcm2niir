@@ -112,7 +112,7 @@ install_dcm2nii = function(
         print(getwd())
         print(list.files())
         message("listing build dir")
-        print(list.files(dir, recursive = TRUE))
+        print(list.files(build_dir, recursive = TRUE))
       }
       system(cmd)
       if (verbose > 1) {  
