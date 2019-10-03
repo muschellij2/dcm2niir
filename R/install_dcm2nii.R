@@ -103,7 +103,7 @@ install_dcm2nii = function(
         # -DUSE_JPEGLS=ON
         ifelse(jpeg, " -DUSE_OPENJPEG=ON ", ""), 
         " ", cmake_opts, 
-        " ", build_dir)
+        " ", tdir)
       if (verbose) {
         msg = paste0("cmd is ", cmd)
         message(msg)
@@ -125,7 +125,7 @@ install_dcm2nii = function(
         print(list.files())        
         message("listing build dir")
         print(list.files(path = build_dir))
-        print("CMakeLists")
+        print("printing CMakeLists")
         cml = list.files(pattern = "CMakeLists.txt", 
                          recursive = TRUE, path = build_dir)
         print(cml)
