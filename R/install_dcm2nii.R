@@ -98,10 +98,15 @@ install_dcm2nii = function(
       })
       cmake_flags = ""
       if (sysname == "windows") {
-        cmake_flags = c(cmake_flags, 
-                        '-G "Unix Makefiles"',
-                        "-DCMAKE_SH:BOOL=OFF")
+        cmake_flags = c(
+          cmake_flags, 
+          '-G "Unix Makefiles"',
+          "-DCMAKE_SH:BOOL=OFF",
+          "-DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc",
+          "-DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++",
+          "-DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres")
       }
+      
       cmake_flags = paste(cmake_flags, collapse = " ")
       setwd(build_dir)
       cmd = paste0(
