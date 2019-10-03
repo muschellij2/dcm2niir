@@ -103,7 +103,7 @@ install_dcm2nii = function(
         # -DUSE_JPEGLS=ON
         ifelse(jpeg, " -DUSE_OPENJPEG=ON ", ""), 
         " ", cmake_opts, 
-        " ", tdir)
+        " ", build_dir)
       if (verbose) {
         msg = paste0("cmd is ", cmd)
         message(msg)
