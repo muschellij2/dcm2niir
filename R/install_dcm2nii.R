@@ -96,10 +96,16 @@ install_dcm2nii = function(
       on.exit({
         setwd(owd)
       })
+      cmake_flags = ""
+      if (sysname == "windows") {
+        cmake_flags = c(cmake_flags, '-G "MinGW Makefiles"')
+      }
+      cmake_flags = paste(cmake_flags, collapse = " ")
       setwd(build_dir)
       cmd = paste0(
         # "cd ", build_dir, "; ", 
         cmake, 
+        cmake_flags,
         # -DUSE_JPEGLS=ON
         ifelse(jpeg, " -DUSE_OPENJPEG=ON ", ""), 
         " ", cmake_opts, 
