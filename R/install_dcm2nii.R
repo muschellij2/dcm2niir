@@ -104,7 +104,7 @@ install_dcm2nii = function(
           "-DCMAKE_SH:BOOL=OFF",
           "-DCMAKE_C_COMPILER=c:/Rtools/mingw_64/bin/x86_64-w64-mingw32-gcc.exe",
           "-DCMAKE_CXX_COMPILER=c:/Rtools/mingw_64/bin/x86_64-w64-mingw32-g++.exe",
-          "-DCMAKE_RC_COMPILER=c:/Rtools/mingw_64/bin/x86_64-w64-mingw32-windres.exe")
+          "-DCMAKE_RC_COMPILER=c:/Rtools/mingw_64/bin/windres.exe")
       }
       
       cmake_flags = paste(cmake_flags, collapse = " ")
