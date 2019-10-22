@@ -9,6 +9,7 @@ test_that("install_dcm2nii", {
 
 
 test_that("install_dcm2nii source", {
+  testthat::skip_on_appveyor()
   install_dir = tempfile()
   dir.create(install_dir, showWarnings = FALSE)
   cmake = Sys.which("cmake")
