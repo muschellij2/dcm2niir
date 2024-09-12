@@ -4,8 +4,10 @@
 \alias{dcm2nii_bin}
 \title{Make path for dcm2nii binary}
 \usage{
-dcm2nii_bin(progdir = system.file(package = "dcm2niir"),
-  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"))
+dcm2nii_bin(
+  progdir = system.file(package = "dcm2niir"),
+  dcm2niicmd = c("dcm2niix", "dcm2niix_feb2024", "dcm2nii_2009", "dcm2nii")
+)
 }
 \arguments{
 \item{progdir}{(character) directory of bash scripts, no user input needed unless

@@ -10,7 +10,8 @@
 #' binaries were installed elsewhere. Passed to \code{\link{dcm2nii_bin}}.
 #' @param verbose (logical) print diagnostic printouts
 #' @param dcm2niicmd (character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
-#' are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.
+#' are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.  
+#' The default is `dcm2niix`, but `dcm2niix_feb2024` has updated features.
 #' @param opts list of arguments to pass to \code{dcm2nii}.
 #' @param ... arguments to be passed to \code{\link{system}}
 #' @return List of result of \code{system} command, names of files before and after
@@ -78,7 +79,7 @@ dcm2nii <- function(
   copy_files = TRUE,
   progdir = system.file(package = "dcm2niir"), 
   verbose = TRUE, 
-  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"), 
+  dcm2niicmd = c("dcm2niix",  "dcm2niix_feb2024", "dcm2nii_2009", "dcm2nii"), 
   merge_files = FALSE,
   ignore_derived = FALSE,
   unzip_files = TRUE,

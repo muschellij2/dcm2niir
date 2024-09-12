@@ -4,10 +4,17 @@
 \alias{install_dcm2nii}
 \title{Install dcm2nii tools}
 \usage{
-install_dcm2nii(lib.loc = NULL, overwrite = FALSE,
-  from_source = FALSE, jpeg = FALSE, progdir = NULL,
-  cmake_opts = "", verbose = TRUE, source_clone_dir = NULL,
-  git_url = "https://github.com/rordenlab/dcm2niix")
+install_dcm2nii(
+  lib.loc = NULL,
+  overwrite = FALSE,
+  from_source = FALSE,
+  jpeg = FALSE,
+  progdir = NULL,
+  cmake_opts = "",
+  verbose = TRUE,
+  source_clone_dir = NULL,
+  git_url = "https://github.com/rordenlab/dcm2niix"
+)
 }
 \arguments{
 \item{lib.loc}{a character vector with path names of R libraries.

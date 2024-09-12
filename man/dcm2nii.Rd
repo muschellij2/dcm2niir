@@ -7,20 +7,34 @@
 \alias{fix_sidecar}
 \title{Simple run of DICOM 2 NIfTI Converter}
 \usage{
-dcm2nii(basedir = ".", files = NULL, copy_files = TRUE,
-  progdir = system.file(package = "dcm2niir"), verbose = TRUE,
+dcm2nii(
+  basedir = ".",
+  files = NULL,
+  copy_files = TRUE,
+  progdir = system.file(package = "dcm2niir"),
+  verbose = TRUE,
+  dcm2niicmd = c("dcm2niix", "dcm2niix_feb2024", "dcm2nii_2009", "dcm2nii"),
+  merge_files = FALSE,
+  ignore_derived = FALSE,
+  unzip_files = TRUE,
+  opts = paste0("-9 ", ifelse(ignore_derived, "-i y ", ""), ifelse(merge_files, " -m y ",
+    ""), paste0(" -v ", as.numeric(verbose)), " -z y -f \%p_\%t_\%s"),
+  ...
+)
+
+dcm2nii_par_rec(
+  file = list.files(pattern = "[.](par|PAR)"),
+  copy_files = TRUE,
+  verbose = TRUE,
+  ...
+)
+
+dcm2nii_bids_sidecar(
+  basedir,
+  progdir = system.file(package = "dcm2niir"),
   dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
-  merge_files = FALSE, ignore_derived = FALSE, unzip_files = TRUE,
-  opts = paste0("-9 ", ifelse(ignore_derived, "-i y ", ""),
-  ifelse(merge_files, " -m y ", ""), paste0(" -v ", as.numeric(verbose)),
-  " -z y -f \%p_\%t_\%s"), ...)
-
-dcm2nii_par_rec(file = list.files(pattern = "[.](par|PAR)"),
-  copy_files = TRUE, verbose = TRUE, ...)
-
-dcm2nii_bids_sidecar(basedir, progdir = system.file(package =
-  "dcm2niir"), dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii"),
-  ...)
+  ...
+)
 
 fix_sidecar(file)
 }
@@ -38,7 +52,8 @@ binaries were installed elsewhere. Passed to \code{\link{dcm2nii_bin}}.}
 \item{verbose}{(logical) print diagnostic printouts}
 
 \item{dcm2niicmd}{(character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
-are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.}
+are different versions of dcm2nii. Passed to \code{\link{dcm2nii_bin}}.  
+The default is `dcm2niix`, but `dcm2niix_feb2024` has updated features.}
 
 \item{merge_files}{Should files be merged, 
 passed do \code{dcm2nii} options}

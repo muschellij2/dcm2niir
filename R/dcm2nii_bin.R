@@ -14,7 +14,7 @@
 #' }
 dcm2nii_bin = function(      
   progdir = system.file(package = "dcm2niir"), 
-  dcm2niicmd = c("dcm2niix", "dcm2nii_2009", "dcm2nii")
+  dcm2niicmd = c("dcm2niix", "dcm2niix_feb2024", "dcm2nii_2009", "dcm2nii")
   ) {
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname,
