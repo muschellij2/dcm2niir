@@ -4,13 +4,20 @@
 \alias{check_dcm2nii}
 \title{Check Output from \code{dcm2nii}}
 \usage{
-check_dcm2nii(dcm2nii_output, include_json = TRUE)
+check_dcm2nii(
+  dcm2nii_output,
+  include_json = TRUE,
+  ignore_roi_if_multiple = FALSE
+)
 }
 \arguments{
 \item{dcm2nii_output}{Output from \code{\link{dcm2nii}} command, must have
 \code{nii_after} element}
 
 \item{include_json}{Include JSON file if in the output?}
+
+\item{ignore_roi_if_multiple}{If multiple nifti files are found, ignore 
+any that have the format if `ROI1.nii`, `ROI2.nii`, etc.}
 }
 \value{
 Character vector of unique nifti filenames
