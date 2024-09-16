@@ -17,7 +17,8 @@ check_dcm2nii(
 \item{include_json}{Include JSON file if in the output?}
 
 \item{ignore_roi_if_multiple}{If multiple nifti files are found, ignore 
-any that have the format if `ROI1.nii`, `ROI2.nii`, etc.}
+any that have the format if `ROI1.nii`, `ROI2.nii`, etc.  
+See \url{https://github.com/rordenlab/dcm2niix/issues/832}}
 }
 \value{
 Character vector of unique nifti filenames

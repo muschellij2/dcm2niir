@@ -6,7 +6,8 @@
 #' \code{nii_after} element
 #' @param include_json Include JSON file if in the output?
 #' @param ignore_roi_if_multiple If multiple nifti files are found, ignore 
-#' any that have the format if `ROI1.nii`, `ROI2.nii`, etc.
+#' any that have the format if `ROI1.nii`, `ROI2.nii`, etc.  
+#' See \url{https://github.com/rordenlab/dcm2niix/issues/832}
 #'
 #' @return Character vector of unique nifti filenames
 #' @importFrom dplyr arrange group_by desc slice
