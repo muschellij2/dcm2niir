@@ -23,15 +23,15 @@
 #' @importFrom fs path fs_path
 #' @importFrom httr stop_for_status GET write_disk progress
 install_dcm2nii = function(
-  lib.loc = NULL,
-  overwrite = FALSE,
-  from_source = FALSE,
-  jpeg = FALSE,
-  progdir = NULL,
-  cmake_opts = "", 
-  verbose = TRUE,
-  source_clone_dir = NULL,
-  git_url = "https://github.com/rordenlab/dcm2niix"){
+    lib.loc = NULL,
+    overwrite = FALSE,
+    from_source = FALSE,
+    jpeg = FALSE,
+    progdir = NULL,
+    cmake_opts = "", 
+    verbose = TRUE,
+    source_clone_dir = NULL,
+    git_url = "https://github.com/rordenlab/dcm2niix"){
   
   sysname = tolower(Sys.info()["sysname"])
   app = switch(sysname, linux = "_linux", darwin = "")
@@ -203,3 +203,37 @@ install_dcm2nii = function(
 }
 
 
+#' @rdname install_dcm2nii
+#' @export
+#' @param dcm2niicmd (character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
+#' are different versions of dcm2nii. 
+install_dcm2nii_bin = function(
+    progdir = system.file(package = "dcm2niir"), 
+    dcm2niicmd = c("dcm2niix", "dcm2niix_feb2024", "dcm2nii_2009", "dcm2nii"),
+    overwrite = FALSE
+) {
+  
+  sysname = tolower(Sys.info()["sysname"])
+  app = switch(sysname, linux = "_linux", darwin = "")
+  fname = paste0(dcm2niicmd, app)
+  dcm2nii_files = fs::path(progdir, fname)
+  
+  url = paste0("https://github.com/muschellij2/dcm2niir/raw", 
+               "/gh-pages/dcm2nii_files.zip")
+  urlfile <- fs::path(
+    progdir,
+    "dcm2nii_files.zip")    
+  # download.file(url, urlfile)
+  req = httr::GET(
+    url, 
+    httr::write_disk(path = urlfile, overwrite = overwrite),
+    httr::progress())  
+  httr::stop_for_status(req)
+  files = unzip(urlfile,
+                exdir = progdir,
+                junkpaths = TRUE)
+  for (ifile in files) system(sprintf("chmod +x %s", ifile))
+  x = file.remove(urlfile)
+  rm(x)
+  return(file.exists(dcm2nii_files))
+}

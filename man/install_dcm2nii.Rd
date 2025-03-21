@@ -2,6 +2,7 @@
 % Please edit documentation in R/install_dcm2nii.R
 \name{install_dcm2nii}
 \alias{install_dcm2nii}
+\alias{install_dcm2nii_bin}
 \title{Install dcm2nii tools}
 \usage{
 install_dcm2nii(
@@ -14,6 +15,12 @@ install_dcm2nii(
   verbose = TRUE,
   source_clone_dir = NULL,
   git_url = "https://github.com/rordenlab/dcm2niix"
+)
+
+install_dcm2nii_bin(
+  progdir = system.file(package = "dcm2niir"),
+  dcm2niicmd = c("dcm2niix", "dcm2niix_feb2024", "dcm2nii_2009", "dcm2nii"),
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -39,6 +46,9 @@ are required and the current version is cloned from
 source install.  Do not use unless you know what you're doing.}
 
 \item{git_url}{URL of \code{git} repository used for building from source}
+
+\item{dcm2niicmd}{(character) either "dcm2niix", "dcm2nii", or "dcm2nii_2009", which 
+are different versions of dcm2nii.}
 }
 \description{
 Install dcm2nii to dcm2niir for conversion tools
