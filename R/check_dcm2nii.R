@@ -8,6 +8,8 @@
 #' @param ignore_roi_if_multiple If multiple nifti files are found, ignore 
 #' any that have the format if `ROI1.nii`, `ROI2.nii`, etc.  
 #' See \url{https://github.com/rordenlab/dcm2niix/issues/832}
+#' @param uncorrected If \code{TRUE}, then the function will not attempt to
+#' grab the "corrected" image (e.g. normalized or tilt corrected).
 #'
 #' @return Character vector of unique nifti filenames
 #' @importFrom dplyr arrange group_by desc slice
@@ -15,7 +17,8 @@
 #' @importFrom utils head
 check_dcm2nii = function(dcm2nii_output,
                          include_json = TRUE,
-                         ignore_roi_if_multiple = FALSE){
+                         ignore_roi_if_multiple = FALSE,
+                         uncorrected = FALSE){
   #   print(path)
   #   niis = dcm2nii(path)
   stub = NULL
@@ -59,7 +62,11 @@ check_dcm2nii = function(dcm2nii_output,
         stringsAsFactors = FALSE)
       df = dplyr::left_join(df, j_df, by = "stub")
     }
-    df = dplyr::arrange(df, stub, desc(nc))
+    if (uncorrected) {
+      df = dplyr::arrange(df, stub, nc)
+    } else {
+      df = dplyr::arrange(df, stub, desc(nc))
+    }
     df = dplyr::group_by(df, stub)
     df = dplyr::slice(df, 1)
     niis = df$name

@@ -7,7 +7,8 @@
 check_dcm2nii(
   dcm2nii_output,
   include_json = TRUE,
-  ignore_roi_if_multiple = FALSE
+  ignore_roi_if_multiple = FALSE,
+  uncorrected = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ check_dcm2nii(
 \item{ignore_roi_if_multiple}{If multiple nifti files are found, ignore 
 any that have the format if `ROI1.nii`, `ROI2.nii`, etc.  
 See \url{https://github.com/rordenlab/dcm2niix/issues/832}}
+
+\item{uncorrected}{If \code{TRUE}, then the function will not attempt to
+grab the "corrected" image (e.g. normalized or tilt corrected).}
 }
 \value{
 Character vector of unique nifti filenames
