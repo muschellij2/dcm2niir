@@ -1,3 +1,7 @@
+# dcm2niir 0.8.1
+
+* Allows `cleanup` on `dcm2nii`.
+
 # dcm2niir 0.6.9
 
 * Allowed `git_url` in `install_dcm2nii`.

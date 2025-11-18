@@ -19,6 +19,7 @@ dcm2nii(
   unzip_files = TRUE,
   opts = paste0("-9 ", ifelse(ignore_derived, "-i y ", ""), ifelse(merge_files, " -m y ",
     ""), paste0(" -v ", as.numeric(verbose)), " -z y -f \%p_\%t_\%s"),
+  cleanup = FALSE,
   ...
 )
 
@@ -65,6 +66,8 @@ passed do \code{dcm2nii} options}
 will be unzipped}
 
 \item{opts}{list of arguments to pass to \code{dcm2nii}.}
+
+\item{cleanup}{if \code{copy_files} is \code{TRUE}, should temporary files be deleted?}
 
 \item{...}{arguments to be passed to \code{\link{system}}}
 
