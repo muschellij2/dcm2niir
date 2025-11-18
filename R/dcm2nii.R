@@ -176,6 +176,9 @@ dcm2nii <- function(
     }
     unlink(dir_temp, recursive = TRUE)
   }
+  if (!cleanup) {
+    attr(res, "copy_files_temporary_directory") = dir_temp
+  }
   return(list(result = res, 
               nii_before = l_before,
               nii_after = l_after,
