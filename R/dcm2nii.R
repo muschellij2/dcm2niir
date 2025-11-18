@@ -179,14 +179,15 @@ dcm2nii <- function(
   if (!cleanup) {
     attr(res, "copy_files_temporary_directory") = dir_temp
   }
-  return(list(result = res, 
-              nii_before = l_before,
-              nii_after = l_after,
-              json_after = j_after,
-              json_before = j_before,
-              cmd = cmd
-  )
-  )
+  result_final = list(result = res, 
+                      nii_before = l_before,
+                      nii_after = l_after,
+                      json_after = j_after,
+                      json_before = j_before,
+                      cmd = cmd,
+                      copy_files = copy_files)
+  result_final$copy_files_temporary_directory = dir_temp
+  return(result_final)
 } ## end dcm2nii
 
 #' @param file A Par/REC file
